@@ -1,0 +1,23 @@
+:root{
+    --melon: #FFBAA4;
+    --amarillo:#FFE441;
+    --verdesito:#7AC3B2;
+}
+* {
+margin: 0;
+padding: 0;
+}
+
+body {
+    background: var(--melon);
+    border-radius: 40px ;
+}
+.animals {
+    width: 100%;
+
+}
+.daddyButtons{
+    display: flex;
+    flex-direction: column;
+
+}
