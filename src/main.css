@@ -12,6 +12,11 @@ body {
     background: var(--melon);
     border-radius: 40px ;
 }
+.title {
+    font-family:'Baloo Thambi';
+    font-size: 70px;
+    font-weight: 400;
+}
 .animals {
     width: 100%;
 
