@@ -3,6 +3,15 @@ import { onNavigate } from '../main.js';
 // import { patita, animalestres } from '../imagenes/exportimages.js';
 
 export const home = () => {
+  const homeDiv = document.createElement('div');
+  homeDiv.className = 'homeDiv';
+  const logoDiv = document.createElement('div');
+  logoDiv.className = 'logoDiv';
+  const imageDiv = document.createElement('div');
+  imageDiv.className = 'imageDiv';
+  const buttonDiv = document.createElement('div');
+  buttonDiv.className = 'buttonDiv';
+
   const footprint = document.createElement('img');
   footprint.src = './imagenes/patita.png';
   footprint.alt = 'la huella de una patita';
@@ -19,7 +28,6 @@ export const home = () => {
   const googleStart = document.createElement('p');
   googleStart.textContent = 'O inicia sesión con';
 
-  const homeDiv = document.createElement('div');
   const buttonRegister = document.createElement('button');
   const buttonLogin = document.createElement('button');
 
@@ -29,14 +37,19 @@ export const home = () => {
   buttonRegister.addEventListener('click', () => onNavigate('/register'));
   buttonLogin.addEventListener('click', () => onNavigate('/login'));
 
-  homeDiv.appendChild(footprint);
-  homeDiv.appendChild(title);
-  homeDiv.appendChild(animals);
+  homeDiv.appendChild(logoDiv);
+  homeDiv.appendChild(imageDiv);
+  homeDiv.appendChild(buttonDiv);
 
-  homeDiv.appendChild(buttonRegister);
-  homeDiv.appendChild(pregunta);
-  homeDiv.appendChild(buttonLogin);
-  homeDiv.appendChild(googleStart);
+  logoDiv.appendChild(footprint);
+  logoDiv.appendChild(title);
+
+  imageDiv.appendChild(animals);
+
+  buttonDiv.appendChild(buttonRegister);
+  buttonDiv.appendChild(pregunta);
+  buttonDiv.appendChild(buttonLogin);
+  buttonDiv.appendChild(googleStart);
 
   return homeDiv;
 };
