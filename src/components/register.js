@@ -1,5 +1,4 @@
-import { onNavigate } from '../main.js';
-export const register = () => {
+export const register = (onNavigate) => {
   const registerDiv = document.createElement('div');
   registerDiv.className = 'registerDiv';
   const logoDiv = document.createElement('div');

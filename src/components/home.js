@@ -1,8 +1,4 @@
-// eslint-disable-next-line import/no-cycle
-import { onNavigate } from '../main.js';
-// import { patita, animalestres } from '../imagenes/exportimages.js';
-
-export const home = () => {
+export const home = (onNavigate) => {
   const homeDiv = document.createElement('div');
   homeDiv.className = 'homeDiv';
   const logoDiv = document.createElement('div');
@@ -29,7 +25,9 @@ export const home = () => {
   googleStart.textContent = 'O inicia sesión con';
 
   const buttonRegister = document.createElement('button');
+  buttonRegister.className = 'buttonRegister';
   const buttonLogin = document.createElement('button');
+  buttonLogin.className = 'buttonLogin';
 
   buttonRegister.textContent = 'Crear cuenta';
   buttonLogin.textContent = 'Ingresa';
