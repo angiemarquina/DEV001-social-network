@@ -2,6 +2,21 @@
     --melon: #FFBAA4;
     --amarillo:#FFE441;
     --verdesito:#7AC3B2;
+    --melon: #FFBAA4;
+    --amarillo:#FFE441;
+    --celestito: #A7E1E9;
+    --verdesito:#7AC3B2;
+    --black: #000000;
+    --white: #FFFFFF;
+    --white-forms: #FEF6F6;
+    --gray: #797575;
+    --width-buttons: 246px;
+    --height-buttons: 41px;
+    --font-title: 70px;
+    --font-size-button: 24px;
+    --font-size-pequeña: 16px;
+    --width-paw: 25%;
+
 }
 * {
 margin: 0;
@@ -12,10 +27,18 @@ body {
     background: var(--melon);
     border-radius: 40px ;
 }
+.homeDiv{
+    display: grid;
+    justify-items: center;
+}
+.footprint{
+    width: 25%;
+}
 .title {
     font-family:'Baloo Thambi';
     font-size: 70px;
     font-weight: 400;
+    color: white;
 }
 .animals {
     width: 100%;
@@ -26,3 +49,25 @@ body {
     flex-direction: column;
 
 }
+.buttonRegister{
+    border-radius: 50px;
+    font-family:'Baloo Thambi';
+    font-size: 17px;
+    width: 200px;
+    height: 30px;
+    background-color: #A7E1E9;
+    border-color: inherit;
+}
+.buttonLogin{
+    border-radius: 50px;
+    font-family:'Baloo Thambi';
+    font-size: 17px;
+    width: 200px;
+    height: 30px;
+    background-color: #FFE441;
+    border-color: inherit;
+}
+
+
+
+

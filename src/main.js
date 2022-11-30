@@ -5,11 +5,7 @@ import { login } from './components/login.js';
 import './fiberbase/firebase.js';
 
 const rootDiv = document.getElementById('root');
-const routes = {
-  '/': home,
-  '/register': register,
-  '/login': login,
-};
+let routes = {};
 
 export const onNavigate = (pathname) => {
   window.history.pushState(
@@ -24,8 +20,13 @@ export const onNavigate = (pathname) => {
 
   rootDiv.appendChild(routes[pathname]());
 };
+routes = {
+  '/': home(onNavigate),
+  '/register': register(onNavigate),
+  '/login': login(onNavigate),
+};
 
-const component = routes[window.location.pathname];
+const component = () => routes[window.location.pathname];
 window.onpopstate = () => {
   rootDiv.appendChild(component());
 };
