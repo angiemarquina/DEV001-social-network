@@ -5,6 +5,9 @@ export const register = (onNavigate) => {
   logoDivViewThree.className = 'logoDiv';
   const dataRegisterDiv = document.createElement('div');
   dataRegisterDiv.className = 'dataRegisterDiv';
+  const formRegister = document.createElement('form');
+  formRegister.id = 'formR';
+  formRegister.action = '';
 
   const footprint = document.createElement('img');
   footprint.src = './imagenes/patitarosa.png';
@@ -15,19 +18,23 @@ export const register = (onNavigate) => {
   titleViewThree.className = 'title';
   const name = document.createElement('input');
   name.type = 'text';
+  name.id = 'nameRegister';
   name.placeholder = 'Nombre';
   name.className = 'name';
   const mail = document.createElement('input');
   mail.type = 'email';
+  mail.id = 'mailRegister';
   mail.placeholder = 'Correo';
   mail.className = 'mail';
   const password = document.createElement('input');
   password.placeholder = 'Contraseña';
   password.type = 'password';
+  password.id = 'passwordRegister';
   password.className = 'password';
   const buttonRegister = document.createElement('button');
   buttonRegister.textContent = 'Registar';
   buttonRegister.className = 'buttonRegister';
+  buttonRegister.type = 'submit';
   const buttonHome = document.createElement('button');
   buttonHome.textContent = 'Regresar al Home';
   buttonHome.className = 'buttonHome';
@@ -39,10 +46,16 @@ export const register = (onNavigate) => {
   logoDivViewThree.appendChild(footprint);
   logoDivViewThree.appendChild(titleViewThree);
 
-  dataRegisterDiv.appendChild(name);
-  dataRegisterDiv.appendChild(mail);
-  dataRegisterDiv.appendChild(password);
-  dataRegisterDiv.appendChild(buttonRegister);
+  dataRegisterDiv.appendChild(formRegister);
+  formRegister.appendChild(name);
+  formRegister.appendChild(mail);
+  formRegister.appendChild(password);
+  formRegister.appendChild(buttonRegister);
+
+  // dataRegisterDiv.appendChild(name);
+  // dataRegisterDiv.appendChild(mail);
+  // dataRegisterDiv.appendChild(password);
+  // dataRegisterDiv.appendChild(buttonRegister);
   dataRegisterDiv.appendChild(buttonHome);
 
   return registerDiv;
