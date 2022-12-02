@@ -3,6 +3,7 @@ import { home } from './components/home.js';
 import { register } from './components/register.js';
 import { login } from './components/login.js';
 import './fiberbase/firebase.js';
+import './fiberbase/signupRForm';
 
 const rootDiv = document.getElementById('root');
 let routes = {};
