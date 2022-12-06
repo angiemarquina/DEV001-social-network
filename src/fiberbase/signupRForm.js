@@ -1,11 +1,13 @@
 const signupRForm = document.querySelector('#formR');
 
-signupRForm.addEventListener('submit', (e) => {
-  e.preventDefault();
+console.log(signupRForm);
 
-  const nameR = signupRForm.nameRegister;
-  const registerR = signupRForm.mailRegister;
-  const passwordR = signupRForm.passwordRegister;
+// signupRForm.addEventListener('submit', (e) => {
+// e.preventDefault();
 
-  console.log(nameR, registerR, passwordR);
-});
+// const nameR = signupRForm.nameRegister;
+// const registerR = signupRForm.mailRegister;
+// const passwordR = signupRForm.passwordRegister;
+
+// console.log(nameR, registerR, passwordR);
+// });
