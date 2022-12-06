@@ -1,4 +1,4 @@
-const signupRForm = document.querySelector('#formR');
+import { auth } from './firebase.js';
 
 console.log(signupRForm);
 
