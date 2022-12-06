@@ -1,11 +1,12 @@
-const signupRForm = document.querySelector('#formR');
+import { auth } from './firebase.js';
 
-signupRForm.addEventListener('submit', (e) => {
-  e.preventDefault();
+console.log('hello');
+// signupRForm.addEventListener('submit', (e) => {
+//   e.preventDefault();
 
-  const nameR = signupRForm.nameRegister;
-  const registerR = signupRForm.mailRegister;
-  const passwordR = signupRForm.passwordRegister;
+//   const nameR = signupRForm.nameRegister;
+//   const registerR = signupRForm.mailRegister;
+//   const passwordR = signupRForm.passwordRegister;
 
-  console.log(nameR, registerR, passwordR);
-});
+//   console.log(nameR, registerR, passwordR);
+// });

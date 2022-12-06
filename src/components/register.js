@@ -1,3 +1,5 @@
+import { signUp } from 'firebase/auth';
+
 export const register = (onNavigate) => {
   const registerDiv = document.createElement('div');
   registerDiv.className = 'registerDiv';
@@ -58,5 +60,27 @@ export const register = (onNavigate) => {
   // dataRegisterDiv.appendChild(buttonRegister);
   dataRegisterDiv.appendChild(buttonHome);
 
+  const signupRForm = registerDiv.querySelector('#formR');
+  console.log(signupRForm);
+
+  signupRForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nameR = signupRForm.nameRegister.value;
+    const registerR = signupRForm.mailRegister.value;
+    const passwordR = signupRForm.passwordRegister.value;
+    console.log(nameR, registerR, passwordR);
+
+    signUp(mail, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+  });
   return registerDiv;
 };
