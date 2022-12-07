@@ -2,6 +2,7 @@
 import { home } from './components/home.js';
 import { register } from './components/register.js';
 import { login } from './components/login.js';
+import { muro } from './components/muro.js';
 import './fiberbase/firebase.js';
 import './fiberbase/signupRForm';
 
@@ -25,6 +26,7 @@ routes = {
   '/': home(onNavigate),
   '/register': register(onNavigate),
   '/login': login(onNavigate),
+  '/muro': muro(onNavigate),
 };
 
 const component = () => routes[window.location.pathname];

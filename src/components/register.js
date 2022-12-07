@@ -1,4 +1,4 @@
-import { signUp } from 'firebase/auth';
+import { signUp } from '../fiberbase/firebase';
 
 export const register = (onNavigate) => {
   const registerDiv = document.createElement('div');
@@ -72,7 +72,7 @@ export const register = (onNavigate) => {
 
     signUp(mail, password)
       .then((userCredential) => {
-        // Signed in 
+        // Signed in
         const user = userCredential.user;
         // ...
       })
