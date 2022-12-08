@@ -33,6 +33,16 @@ export const register = (onNavigate) => {
   password.type = 'password';
   password.id = 'passwordRegister';
   password.className = 'password';
+  const spanMail = document.createElement('span');
+  spanMail.textContent = '';
+  spanMail.className = 'spanMail';
+  const spanPassword = document.createElement('span');
+  spanPassword.textContent = '';
+  spanPassword.className = 'spanPassword';
+  const spanUser = document.createElement('span');
+  spanUser.textContent = '';
+  spanUser.className = 'spanUser';
+
   const buttonRegister = document.createElement('button');
   buttonRegister.textContent = 'Registar';
   buttonRegister.className = 'buttonRegister';
@@ -50,8 +60,11 @@ export const register = (onNavigate) => {
 
   dataRegisterDiv.appendChild(formRegister);
   formRegister.appendChild(name);
+  formRegister.appendChild(spanUser);
   formRegister.appendChild(mail);
+  formRegister.appendChild(spanMail);
   formRegister.appendChild(password);
+  formRegister.appendChild(spanPassword);
   formRegister.appendChild(buttonRegister);
 
   // dataRegisterDiv.appendChild(name);
@@ -70,16 +83,25 @@ export const register = (onNavigate) => {
     const passwordR = signupRForm.passwordRegister.value;
     console.log(nameR, registerR, passwordR);
 
-    signUp(mail, password)
+    signUp(registerR, passwordR)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         // ...
+        console.log(user);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         // ..
+        console.log(errorCode, errorMessage);
+        if (errorCode === 'auth/email-already-in-use') {
+          spanUser.innerHTML = 'Ese usuario ya fue registrado';
+        } else if (errorCode === 'auth/invalid-email') {
+          spanMail.innerHTML = 'Correo invalido';
+        } else if (errorCode === 'auth/weak-password') {
+          spanPassword.innerHTML = 'La contraseña debe tener mas de 6 caracteres';
+        }
       });
   });
   return registerDiv;
