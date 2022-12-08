@@ -70,16 +70,18 @@ export const register = (onNavigate) => {
     const passwordR = signupRForm.passwordRegister.value;
     console.log(nameR, registerR, passwordR);
 
-    signUp(mail, password)
+    signUp(registerR, passwordR)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         // ...
+        console.log(user);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         // ..
+        console.log(errorCode, errorMessage);
       });
   });
   return registerDiv;
