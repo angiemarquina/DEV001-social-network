@@ -36,12 +36,15 @@ export const register = (onNavigate) => {
   const spanMail = document.createElement('span');
   spanMail.textContent = '';
   spanMail.className = 'spanMail';
+  spanMail.id = 'spanMail';
+
   const spanPassword = document.createElement('span');
   spanPassword.textContent = '';
   spanPassword.className = 'spanPassword';
   const spanUser = document.createElement('span');
   spanUser.textContent = '';
   spanUser.className = 'spanUser';
+  spanUser.id = 'spanUser';
 
   const buttonRegister = document.createElement('button');
   buttonRegister.textContent = 'Registar';
@@ -95,8 +98,19 @@ export const register = (onNavigate) => {
         const errorMessage = error.message;
         // ..
         console.log(errorCode, errorMessage);
+
         if (errorCode === 'auth/email-already-in-use') {
           spanUser.innerHTML = 'Ese usuario ya fue registrado';
+          // const mensaje = document.getElementById('#spanMail');
+          registerR.document.querySelector('#spanMail');
+          // const input = document.getElementById('#mailRegister');
+          mail.document.querySelector('#mailRegister');
+
+          mail.addEventListener('input', () => {
+            if (registerR.textContent === 'Ese usuario ya fue registrado') {
+              registerR.remove();
+            }
+          });
         } else if (errorCode === 'auth/invalid-email') {
           spanMail.innerHTML = 'Correo invalido';
         } else if (errorCode === 'auth/weak-password') {
