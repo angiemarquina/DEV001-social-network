@@ -21,6 +21,7 @@ export const home = (onNavigate) => {
   animals.alt = 'perro, gato y pajaro';
   const pregunta = document.createElement('p');
   pregunta.textContent = '¿Ya tienes cuenta?';
+
   const googleStart = document.createElement('p');
   googleStart.textContent = 'O inicia sesión con';
 
@@ -28,9 +29,14 @@ export const home = (onNavigate) => {
   buttonRegister.className = 'buttonRegister';
   const buttonLogin = document.createElement('button');
   buttonLogin.className = 'buttonLogin';
+  const buttonLoginGoogle = document.createElement('button');
+  buttonLoginGoogle.className = 'buttonLoginGoogle';
+  buttonLoginGoogle.id = 'buttonLoginGoogle';
+  buttonLoginGoogle.type = 'button';
 
   buttonRegister.textContent = 'Crear cuenta';
   buttonLogin.textContent = 'Ingresa';
+  buttonLoginGoogle.textContent = 'Google';
 
   buttonRegister.addEventListener('click', () => onNavigate('/register'));
   buttonLogin.addEventListener('click', () => onNavigate('/login'));
@@ -48,6 +54,7 @@ export const home = (onNavigate) => {
   buttonDiv.appendChild(pregunta);
   buttonDiv.appendChild(buttonLogin);
   buttonDiv.appendChild(googleStart);
+  buttonDiv.appendChild(buttonLoginGoogle);
 
   return homeDiv;
 };
