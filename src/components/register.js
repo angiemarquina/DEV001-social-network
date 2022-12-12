@@ -101,17 +101,19 @@ export const register = (onNavigate) => {
 
         if (errorCode === 'auth/email-already-in-use') {
           spanUser.innerHTML = 'Ese usuario ya fue registrado';
-          // const mensaje = document.getElementById('#spanMail');
-          registerR.document.querySelector('#spanMail');
-          // const input = document.getElementById('#mailRegister');
-          mail.document.querySelector('#mailRegister');
+        }
+        // const mensaje = document.getElementById('#spanMail');
+        spanMail.document.querySelector('#spanMail');
+        // const input = document.getElementById('#mailRegister');
+        mail.document.querySelector('#mailRegister');
 
-          mail.addEventListener('input', () => {
-            if (registerR.textContent === 'Ese usuario ya fue registrado') {
-              registerR.remove();
-            }
-          });
-        } else if (errorCode === 'auth/invalid-email') {
+        mail.addEventListener('input', () => {
+          if (spanMail.textContent === 'Ese usuario ya fue registrado') {
+            spanMail.remove();
+          }
+        });
+        
+        else if (errorCode === 'auth/invalid-email') {
           spanMail.innerHTML = 'Correo invalido';
         } else if (errorCode === 'auth/weak-password') {
           spanPassword.innerHTML = 'La contraseña debe tener mas de 6 caracteres';
