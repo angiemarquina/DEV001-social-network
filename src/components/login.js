@@ -1,3 +1,5 @@
+import { signIn, auth } from '../fiberbase/firebase.js';
+
 export const login = (onNavigate) => {
   const loginDiv = document.createElement('div');
   loginDiv.className = 'loginDiv';
@@ -7,6 +9,10 @@ export const login = (onNavigate) => {
   logoDiv.className = 'logoDivViewTwo';
   const dataLoginDiv = document.createElement('div');
   dataLoginDiv.className = 'dataLoginDiv';
+  const formLogin = document.createElement('form');
+  formLogin.id = 'formL';
+  formLogin.action = '';
+  formLogin.className = 'formLogin';
 
   const footprint = document.createElement('img');
   footprint.src = './imagenes/patita2.png';
@@ -21,10 +27,14 @@ export const login = (onNavigate) => {
   mail.type = 'email';
   mail.placeholder = 'Correo';
   mail.className = 'mailViewTwo';
+  mail.id = 'mailLogin';
+
   const password = document.createElement('input');
   password.type = 'password';
   password.placeholder = 'Contraseña';
   password.className = 'passwordViewTwo';
+  password.id = 'passwordL';
+
   const buttonLogin = document.createElement('button');
   buttonLogin.textContent = 'Ingresa';
   buttonLogin.className = 'buttonLoginViewTwo';
@@ -40,16 +50,36 @@ export const login = (onNavigate) => {
   loginDiv.appendChild(footprintDivTwo);
   loginDiv.appendChild(logoDiv);
   loginDiv.appendChild(dataLoginDiv);
-
+  dataLoginDiv.appendChild(formLogin);
   footprintDivTwo.appendChild(footprint);
 
   logoDiv.appendChild(title);
 
-  dataLoginDiv.appendChild(mail);
-  dataLoginDiv.appendChild(password);
-  dataLoginDiv.appendChild(buttonLogin);
-  dataLoginDiv.appendChild(forgetPassword);
+  formLogin.appendChild(mail);
+  formLogin.appendChild(password);
+  formLogin.appendChild(buttonLogin);
+  formLogin.appendChild(forgetPassword);
   dataLoginDiv.appendChild(buttonHome);
 
+  const signInForm = loginDiv.querySelector('#formL');
+  signInForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const emailLogin = signInForm.mailLogin.value;
+    const passwordLogin = signInForm.passwordL.value;
+
+    signIn(emailLogin, passwordLogin)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        // ...
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+        console.log(errorCode, errorMessage);
+      });
+  });
   return loginDiv;
 };
