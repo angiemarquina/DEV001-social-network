@@ -28,6 +28,13 @@ export const register = (onNavigate) => {
   mail.id = 'mailRegister';
   mail.placeholder = 'Correo';
   mail.className = 'mail';
+  mail.addEventListener('input', () => {
+    const emailMessage = document.querySelector('#spanMail');
+    if (emailMessage.textContent !== '') {
+      emailMessage.textContent = '';
+    }
+  });
+
   const password = document.createElement('input');
   password.placeholder = 'Contraseña';
   password.type = 'password';
@@ -100,17 +107,7 @@ export const register = (onNavigate) => {
         console.log(errorCode, errorMessage);
 
         if (errorCode === 'auth/email-already-in-use') {
-          spanUser.innerHTML = 'Ese usuario ya fue registrado';
-          // const mensaje = document.getElementById('#spanMail');
-          registerR.document.querySelector('#spanMail');
-          // const input = document.getElementById('#mailRegister');
-          mail.document.querySelector('#mailRegister');
-
-          mail.addEventListener('input', () => {
-            if (registerR.textContent === 'Ese usuario ya fue registrado') {
-              registerR.remove();
-            }
-          });
+          spanMail.innerHTML = 'Ese usuario ya fue registrado';
         } else if (errorCode === 'auth/invalid-email') {
           spanMail.innerHTML = 'Correo invalido';
         } else if (errorCode === 'auth/weak-password') {
@@ -120,3 +117,14 @@ export const register = (onNavigate) => {
   });
   return registerDiv;
 };
+
+// // // const mensaje = document.getElementById('#spanMail');
+// /spanMail.document.querySelector('#spanMail');
+// // // const input = document.getElementById('#mailRegister');
+//  mail.document.querySelector('#mailRegister');
+
+//  mail.addEventListener('input', () => {
+//   if (spanMail.textContent === 'Ese usuario ya fue registrado') {
+//    spanMail.remove();
+//    }
+//  });

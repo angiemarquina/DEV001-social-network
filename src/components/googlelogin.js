@@ -1,11 +1,4 @@
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
-const googleButton = document.queryCommandValue('#buttonLoginGoogle');
+//import './components/register.js';
 
-googleButton.addEventListener('click', () => {
-    
-    const provider = new GoogleAuthProvider()
 
-    signInWithPopup()
-
-})

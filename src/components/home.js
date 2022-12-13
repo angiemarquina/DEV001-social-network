@@ -1,3 +1,5 @@
+import { loginGoogle } from '../fiberbase/firebase.js';
+
 export const home = (onNavigate) => {
   const homeDiv = document.createElement('div');
   homeDiv.className = 'homeDiv';
@@ -56,5 +58,16 @@ export const home = (onNavigate) => {
   buttonDiv.appendChild(googleStart);
   buttonDiv.appendChild(buttonLoginGoogle);
 
+  const googleButton = buttonDiv.querySelector('#buttonLoginGoogle');
+
+  googleButton.addEventListener('click', () => {
+    loginGoogle()
+      .then((credentials) => {
+        console.log(credentials);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
   return homeDiv;
 };
