@@ -180,7 +180,7 @@ padding-bottom: 30%;
     height: 454px;
     width: 250px;
 }
-#formR{
+#formR, .formLogin{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -259,5 +259,8 @@ padding-bottom: 30%;
 
 }
 
+.formLogin{
+
+}
 
 

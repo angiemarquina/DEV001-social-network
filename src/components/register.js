@@ -40,6 +40,13 @@ export const register = (onNavigate) => {
   password.type = 'password';
   password.id = 'passwordRegister';
   password.className = 'password';
+  password.addEventListener('input', () => {
+    const passwordMessage = document.querySelector('#spanPassword');
+    if (passwordMessage.textContent !== '') {
+      passwordMessage.textContent = '';
+    }
+  });
+
   const spanMail = document.createElement('span');
   spanMail.textContent = '';
   spanMail.className = 'spanMail';
@@ -48,10 +55,11 @@ export const register = (onNavigate) => {
   const spanPassword = document.createElement('span');
   spanPassword.textContent = '';
   spanPassword.className = 'spanPassword';
-  const spanUser = document.createElement('span');
-  spanUser.textContent = '';
-  spanUser.className = 'spanUser';
-  spanUser.id = 'spanUser';
+  spanPassword.id = 'spanPassword';
+  // const spanUser = document.createElement('span');
+  // spanUser.textContent = '';
+  // spanUser.className = 'spanUser';
+  // spanUser.id = 'spanUser';
 
   const buttonRegister = document.createElement('button');
   buttonRegister.textContent = 'Registar';
@@ -70,7 +78,7 @@ export const register = (onNavigate) => {
 
   dataRegisterDiv.appendChild(formRegister);
   formRegister.appendChild(name);
-  formRegister.appendChild(spanUser);
+  // formRegister.appendChild(spanUser);
   formRegister.appendChild(mail);
   formRegister.appendChild(spanMail);
   formRegister.appendChild(password);
