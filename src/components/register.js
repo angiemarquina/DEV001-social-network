@@ -65,6 +65,8 @@ export const register = (onNavigate) => {
   buttonRegister.textContent = 'Registar';
   buttonRegister.className = 'buttonRegister';
   buttonRegister.type = 'submit';
+  buttonRegister.addEventListener('click', () => onNavigate('/muro'));
+
   const buttonHome = document.createElement('button');
   buttonHome.textContent = 'Regresar al Home';
   buttonHome.className = 'buttonHome';

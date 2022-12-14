@@ -28,19 +28,39 @@ export const login = (onNavigate) => {
   mail.placeholder = 'Correo';
   mail.className = 'mailViewTwo';
   mail.id = 'mailLogin';
+  mail.addEventListener('input', () => {
+    const emailMessage = document.querySelector('#spanMail');
+    if (emailMessage.textContent !== '') {
+      emailMessage.textContent = '';
+    }
+  });
+
+  const spanMail = document.createElement('span');
+  spanMail.textContent = '';
+  spanMail.className = 'spanMail';
+  spanMail.id = 'spanMail';
 
   const password = document.createElement('input');
   password.type = 'password';
   password.placeholder = 'Contraseña';
   password.className = 'passwordViewTwo';
   password.id = 'passwordL';
+  password.addEventListener('input', () => {
+    const passwordMessage = document.querySelector('#spanPassword');
+    if (passwordMessage.textContent !== '') {
+      passwordMessage.textContent = '';
+    }
+  });
+
+  const spanPassword = document.createElement('span');
+  spanPassword.textContent = '';
+  spanPassword.className = 'spanPassword';
+  spanPassword.id = 'spanPassword';
 
   const buttonLogin = document.createElement('button');
   buttonLogin.textContent = 'Ingresa';
   buttonLogin.className = 'buttonLoginViewTwo';
-  const forgetPassword = document.createElement('p');
-  forgetPassword.className = 'forgetPaswordTwo';
-  forgetPassword.textContent = '¿Olvidaste tu contraseña? Click Aquí';
+  buttonLogin.addEventListener('click', () => onNavigate('/muro'));
 
   const buttonHome = document.createElement('button');
   buttonHome.textContent = 'Regresar al Home';
@@ -56,9 +76,10 @@ export const login = (onNavigate) => {
   logoDiv.appendChild(title);
 
   formLogin.appendChild(mail);
+  formLogin.appendChild(spanMail);
   formLogin.appendChild(password);
+  formLogin.appendChild(spanPassword);
   formLogin.appendChild(buttonLogin);
-  formLogin.appendChild(forgetPassword);
   dataLoginDiv.appendChild(buttonHome);
 
   const signInForm = loginDiv.querySelector('#formL');
@@ -79,6 +100,12 @@ export const login = (onNavigate) => {
         const errorMessage = error.message;
         // ..
         console.log(errorCode, errorMessage);
+
+        if (errorCode === 'auth/user-not-found') {
+          spanMail.innerHTML = 'Registrate primero';
+        } else if (errorCode === 'auth/wrong-password') {
+          spanPassword.innerHTML = 'La contraseña es incorrecta';
+        }
       });
   });
   return loginDiv;
