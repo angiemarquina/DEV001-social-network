@@ -65,7 +65,6 @@ export const register = (onNavigate) => {
   buttonRegister.textContent = 'Registar';
   buttonRegister.className = 'buttonRegister';
   buttonRegister.type = 'submit';
-  buttonRegister.addEventListener('click', () => onNavigate('/muro'));
 
   const buttonHome = document.createElement('button');
   buttonHome.textContent = 'Regresar al Home';
@@ -109,6 +108,7 @@ export const register = (onNavigate) => {
         const user = userCredential.user;
         // ...
         console.log(user);
+        onNavigate('/muro');
       })
       .catch((error) => {
         const errorCode = error.code;
