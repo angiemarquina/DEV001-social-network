@@ -64,6 +64,7 @@ export const home = (onNavigate) => {
     loginGoogle()
       .then((credentials) => {
         console.log(credentials);
+        onNavigate('/muro');
       })
       .catch((error) => {
         console.log(error);
