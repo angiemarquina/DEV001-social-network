@@ -127,14 +127,3 @@ export const register = (onNavigate) => {
   });
   return registerDiv;
 };
-
-// // // const mensaje = document.getElementById('#spanMail');
-// /spanMail.document.querySelector('#spanMail');
-// // // const input = document.getElementById('#mailRegister');
-//  mail.document.querySelector('#mailRegister');
-
-//  mail.addEventListener('input', () => {
-//   if (spanMail.textContent === 'Ese usuario ya fue registrado') {
-//    spanMail.remove();
-//    }
-//  });

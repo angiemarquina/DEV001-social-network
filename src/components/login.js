@@ -1,4 +1,4 @@
-import { signIn, auth } from '../fiberbase/firebase.js';
+import { signIn } from '../fiberbase/firebase.js';
 
 export const login = (onNavigate) => {
   const loginDiv = document.createElement('div');
@@ -58,9 +58,9 @@ export const login = (onNavigate) => {
   spanPassword.id = 'spanPassword';
 
   const buttonLogin = document.createElement('button');
+  buttonLogin.type = 'submit';
   buttonLogin.textContent = 'Ingresa';
   buttonLogin.className = 'buttonLoginViewTwo';
-  buttonLogin.addEventListener('click', () => onNavigate('/muro'));
 
   const buttonHome = document.createElement('button');
   buttonHome.textContent = 'Regresar al Home';
@@ -94,6 +94,7 @@ export const login = (onNavigate) => {
         const user = userCredential.user;
         // ...
         console.log(user);
+        onNavigate('/muro');
       })
       .catch((error) => {
         const errorCode = error.code;
