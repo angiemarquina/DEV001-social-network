@@ -1,7 +1,7 @@
 import { loginGoogle } from '../fiberbase/firebase.js';
 
 export const home = (onNavigate) => {
-  const homeDiv = document.createElement('div');
+  const homeDiv = document.createElement('main');
   homeDiv.className = 'homeDiv';
   const logoDiv = document.createElement('div');
   logoDiv.className = 'logoDiv';
