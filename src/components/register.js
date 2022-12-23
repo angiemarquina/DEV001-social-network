@@ -12,17 +12,20 @@ export const register = (onNavigate) => {
   formRegister.action = '';
 
   const footprint = document.createElement('img');
-  footprint.src = './imagenes/patitarosa.png';
+  footprint.src = './imagenes/logorosa.png';
   footprint.alt = 'la huella de una patita';
   footprint.className = 'footprint';
+
   const titleViewThree = document.createElement('h1');
   titleViewThree.textContent = 'CoHabita';
   titleViewThree.className = 'title';
+
   const name = document.createElement('input');
   name.type = 'text';
   name.id = 'nameRegister';
   name.placeholder = 'Nombre';
   name.className = 'name';
+
   const mail = document.createElement('input');
   mail.type = 'email';
   mail.id = 'mailRegister';
@@ -56,10 +59,6 @@ export const register = (onNavigate) => {
   spanPassword.textContent = '';
   spanPassword.className = 'spanPassword';
   spanPassword.id = 'spanPassword';
-  // const spanUser = document.createElement('span');
-  // spanUser.textContent = '';
-  // spanUser.className = 'spanUser';
-  // spanUser.id = 'spanUser';
 
   const buttonRegister = document.createElement('button');
   buttonRegister.textContent = 'Registar';
@@ -75,21 +74,15 @@ export const register = (onNavigate) => {
   registerDiv.appendChild(dataRegisterDiv);
 
   logoDivViewThree.appendChild(footprint);
-  logoDivViewThree.appendChild(titleViewThree);
 
   dataRegisterDiv.appendChild(formRegister);
   formRegister.appendChild(name);
-  // formRegister.appendChild(spanUser);
   formRegister.appendChild(mail);
   formRegister.appendChild(spanMail);
   formRegister.appendChild(password);
   formRegister.appendChild(spanPassword);
   formRegister.appendChild(buttonRegister);
 
-  // dataRegisterDiv.appendChild(name);
-  // dataRegisterDiv.appendChild(mail);
-  // dataRegisterDiv.appendChild(password);
-  // dataRegisterDiv.appendChild(buttonRegister);
   dataRegisterDiv.appendChild(buttonHome);
 
   const signupRForm = registerDiv.querySelector('#formR');

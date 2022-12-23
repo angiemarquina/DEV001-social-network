@@ -3,8 +3,6 @@ import { signIn } from '../fiberbase/firebase.js';
 export const login = (onNavigate) => {
   const loginDiv = document.createElement('main');
   loginDiv.className = 'loginDiv';
-  const footprintDivTwo = document.createElement('div');
-  footprintDivTwo.className = 'footprintDiv';
   const logoDiv = document.createElement('div');
   logoDiv.className = 'logoDivViewTwo';
   const dataLoginDiv = document.createElement('div');
@@ -15,19 +13,15 @@ export const login = (onNavigate) => {
   formLogin.className = 'formLogin';
 
   const footprint = document.createElement('img');
-  footprint.src = './imagenes/patita2.png';
+  footprint.src = './imagenes/logorosa.png';
   footprint.alt = 'la huella de una patita';
   footprint.className = 'footprint';
 
-  const title = document.createElement('h1');
-  title.textContent = 'CoHabita';
-  title.className = 'title';
-
   const mail = document.createElement('input');
+  mail.id = 'mailLogin';
+  mail.className = 'mailViewTwo';
   mail.type = 'email';
   mail.placeholder = 'Correo';
-  mail.className = 'mailViewTwo';
-  mail.id = 'mailLogin';
   mail.addEventListener('input', () => {
     const emailMessage = document.querySelector('#spanMail');
     if (emailMessage.textContent !== '') {
@@ -36,15 +30,15 @@ export const login = (onNavigate) => {
   });
 
   const spanMail = document.createElement('span');
-  spanMail.textContent = '';
-  spanMail.className = 'spanMail';
   spanMail.id = 'spanMail';
+  spanMail.className = 'spanMail';
+  spanMail.textContent = '';
 
   const password = document.createElement('input');
+  password.id = 'passwordL';
+  password.className = 'passwordViewTwo';
   password.type = 'password';
   password.placeholder = 'Contraseña';
-  password.className = 'passwordViewTwo';
-  password.id = 'passwordL';
   password.addEventListener('input', () => {
     const passwordMessage = document.querySelector('#spanPassword');
     if (passwordMessage.textContent !== '') {
@@ -53,33 +47,32 @@ export const login = (onNavigate) => {
   });
 
   const spanPassword = document.createElement('span');
-  spanPassword.textContent = '';
-  spanPassword.className = 'spanPassword';
   spanPassword.id = 'spanPassword';
+  spanPassword.className = 'spanPassword';
+  spanPassword.textContent = '';
 
   const buttonLogin = document.createElement('button');
+  buttonLogin.className = 'buttonLoginViewTwo';
   buttonLogin.type = 'submit';
   buttonLogin.textContent = 'Ingresa';
-  buttonLogin.className = 'buttonLoginViewTwo';
 
   const buttonHome = document.createElement('button');
-  buttonHome.textContent = 'Regresar al Home';
   buttonHome.className = 'btnHomeViewTwo';
+  buttonHome.textContent = 'Regresar al Home';
   buttonHome.addEventListener('click', () => onNavigate('/'));
 
-  loginDiv.appendChild(footprintDivTwo);
   loginDiv.appendChild(logoDiv);
   loginDiv.appendChild(dataLoginDiv);
   dataLoginDiv.appendChild(formLogin);
-  footprintDivTwo.appendChild(footprint);
 
-  logoDiv.appendChild(title);
+  logoDiv.appendChild(footprint);
 
   formLogin.appendChild(mail);
   formLogin.appendChild(spanMail);
   formLogin.appendChild(password);
   formLogin.appendChild(spanPassword);
   formLogin.appendChild(buttonLogin);
+
   dataLoginDiv.appendChild(buttonHome);
 
   const signInForm = loginDiv.querySelector('#formL');
