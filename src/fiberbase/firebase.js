@@ -16,6 +16,8 @@ import {
   onSnapshot,
   deleteDoc,
   doc,
+  getDoc,
+  updateDoc,
 } from 'firebase/firestore';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -44,6 +46,7 @@ export const loginGoogle = () => {
   return signInWithPopup(auth, provider);
 };
 export const signIn = (email, password) => signInWithEmailAndPassword(auth, email, password);
+
 // Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(app);
 export const saveTask = (postConteiner) => {
@@ -52,3 +55,5 @@ export const saveTask = (postConteiner) => {
 export const getTasks = () => getDocs(collection(db, 'posts'));
 export const onGetTasks = (callback) => onSnapshot(collection(db, 'posts'), callback);
 export const deleteTask = (id) => deleteDoc(doc(db, 'posts', id));
+export const getTask = (id) => getDoc(doc(db, 'posts', id));
+export const updateTask = (id, newFields) => updateDoc(doc(db, 'posts', id), newFields);

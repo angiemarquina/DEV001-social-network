@@ -1,7 +1,4 @@
-:root{
-    --melon: #FFBAA4;
-    --amarillo:#FFE441;
-    --verdesito:#7AC3B2;
+:root {
     --melon: #FFBAA4;
     --amarillo:#FFE441;
     --celestito: #A7E1E9;
@@ -16,8 +13,8 @@
     --font-size-button: 24px;
     --font-size-pequeña: 16px;
     --width-paw: 25%;
-
 }
+
 * {
 margin: 0;
 padding: 0;
@@ -26,7 +23,8 @@ padding: 0;
 body { 
     border-radius: 40px ;
 }
-.homeDiv{
+
+.homeDiv {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,24 +32,16 @@ body {
     background-color: var(--melon);
     padding-bottom: 30%;
     border-radius:20px ;
-   padding-top: 20%;
+    padding-top: 20%;
 }
-.footprint{
-    width: 25%;
-    margin-left: 65%;
-}
-.title {
-    font-family:'Baloo Thambi';
-    font-size: 70px;
-    font-weight: 400;
-    color: white;
-}
+
+/*CSS DEL HOME*/
+
 .animals {
     width: 100%;
-
 }
 
-.buttonRegister{
+.buttonRegister {
     border-radius: 50px;
     font-family:'Baloo Thambi';
     font-size: 17px;
@@ -60,40 +50,37 @@ body {
     background-color: #A7E1E9;
     border-color: inherit;
 }
-.buttonLogin{
+
+.buttonLogin {
     border-radius: 50px;
-        font-family: 'Baloo Thambi';
-        font-size: var(--font-size-button);
-        width: var(--width-buttons);
-        height: var(--height-buttons);
-        background-color: #FFE441;
-        border-color: inherit;
+    font-family: 'Baloo Thambi';
+    font-size: var(--font-size-button);
+    width: var(--width-buttons);
+    height: var(--height-buttons);
+    background-color: #FFE441;
+    border-color: inherit;
 }
-p{
+
+p {
     color: var(--gray);
     font-family: 'Baloo Thambi';
     font-size: var(--font-size-pequeña);
     display: flex;
     justify-content: center;
 }
-.footprintDiv{
-    display: flex;
-    justify-content: flex-end;
-}
-.logoDivViewTwo{
-    display: flex;
-    flex-direction: column;
 
+.buttonLoginGoogle {
+    border-radius: 50px;
+    font-family: 'Baloo Thambi';
+    font-size: var(--font-size-button);
+    width: var(--width-buttons);
+    height: var(--height-buttons);
+    background-color: #ffffff;
+    border-color: inherit;
 }
-.loginDiv{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--verdesito);
-    border-radius: 20px;
-    padding-bottom: 30%;
-}
-.dataLoginDiv{
+
+/*cuadro blanco que tiene el form y el boton regreso home en register y login*/
+.dataRegisterDiv, .dataLoginDiv {
  display: flex;
  flex-direction: column;
  align-items: center;
@@ -103,32 +90,45 @@ p{
  background-color: var(--white-forms);
  border-radius: 20px;
 }
-.mailViewTwo{
-    font-size: var(--font-size-button);
-    font-family: 'Baloo Thambi';
-    
-    border: none;
-    border-bottom: 4px solid #797575;
-    width: 245px;
-    background-color: var(--white-forms);
 
+.logoDiv {
+    display: flex;
+    font-family: 'Baloo Thambi';
+    font-size: 70px;
+    font-weight: 400;
+    color: white;
 }
-.mailViewTwo::placeholder{
-    color:#1c86e8;
+
+/*CSS DEL LOGIN*/
+
+.logoDivViewTwo {
+    display: flex;
+    flex-direction: column;
 }
-.passwordViewTwo{
+
+.loginDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--verdesito);
+    border-radius: 20px;
+    padding-bottom: 30%;
+}
+
+.mailViewTwo, .passwordViewTwo {
     font-size: var(--font-size-button);
     font-family: 'Baloo Thambi';
-    color:var(--gray);
     border: none;
     border-bottom: 4px solid #797575;
     width: 245px;
     background-color: var(--white-forms);
 }
-.passwordViewTwo::placeholder{
+
+.mailViewTwo::placeholder, .passwordViewTwo::placeholder {
     color:#1c86e8;
 }
-.buttonLoginViewTwo{
+
+.buttonLoginViewTwo {
     border-radius: 50px;
     font-family:'Baloo Thambi';
     font-size:var(--font-size-button);
@@ -137,13 +137,8 @@ p{
     background-color: #FFE441;
     border-color: inherit;
 }
-.forgetPaswordTwo{
-    font-family:'Baloo Thambi';
-    font-size: var(--font-size-pequeña);
-    color: var(--gray);
 
-}
-.btnHomeViewTwo{
+.btnHomeViewTwo {
     border-radius: 50px;
     font-family:'Baloo Thambi';
     font-size: var(--font-size-button);
@@ -153,41 +148,7 @@ p{
     border-color: inherit;
 }
 
-.registerDiv{
- display: flex;
- flex-direction: column;
- justify-items: center;
- align-items: center;
- background-color: #7AC3B2;
- border-radius: 40px;
-padding-bottom: 30%;
-}
-.logoDivViewThree {
-    display: flex;
-    font-family: 'Baloo Thambi';
-    font-size: 70px;
-    font-weight: 400;
-    color: white;
-}
-.footprint{
-    width:18%;
-    margin-left: 65%;
-    justify-content:right;
-    transform: rotate(45deg);
-}
-.titleViewThree{
-    justify-items: end;
-}
-.dataRegisterDiv{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    background-color: #FEF6F6;
-    border-radius:30px;
-    height: 454px;
-    width: 250px;
-}
-#formR, .formLogin{
+#formR, #formL {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -195,78 +156,58 @@ padding-bottom: 30%;
     height: 300px;
 }
 
-.name::placeholder{
-    color: #1c86e8;
-    font-size: 24px;
-   padding-left: 10px;
+/*CSS DE REGISTER*/
+
+.registerDiv {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    background-color: #7AC3B2;
+    border-radius: 40px;
+    padding-bottom: 30%;
 }
-.name{
-    background-color:#FEF6F6 ;
-    border-top: #FEF6F6 ;
-    border-left: #FEF6F6;
-    border-right: #FEF6F6;
-    border-width:medium;
-    font-family:'Baloo Thambi';
-    outline: none;
-    margin-left: 15px;
-    margin-right: 15px;
-    
-}
-.mail::placeholder{
-    color:#1c86e8;
-    font-size: 24px;
-    padding-left: 10px;
-}
-.mail{
-    background-color: #FEF6F6;
-    border-top: #FEF6F6;
-    border-left: #FEF6F6;
-    border-right: #FEF6F6;
-    border-width: medium;
+
+.name, .mail, .password {
+    font-size: var(--font-size-button);
     font-family: 'Baloo Thambi';
-    outline: none;
-    margin-left: 15px;
-    margin-right: 15px;
-    
+    border: none;
+    border-bottom: 4px solid #797575;
+    width: 245px;
+    background-color: var(--white-forms);
 }
-.password::placeholder{
+
+
+.name::placeholder, .mail::placeholder, .password::placeholder {
     color: #1c86e8;
     font-size: 24px;
     padding-left: 10px;
 }
-.password{
-    background-color: #FEF6F6;
-    border-top: #FEF6F6;
-    border-left: #FEF6F6;
-    border-right: #FEF6F6;
-    border-width: medium;
+
+
+.buttonRegister {
+    border-radius: 50px;
     font-family: 'Baloo Thambi';
-    outline: none;
-    margin-left: 15px;
-    margin-right: 15px;
+    font-size: 24px;
+    width: 246px;
+    height: 41px;
+    background-color: #A7E1E9;
+    border-color: inherit;
 }
-.buttonRegister{
+
+.buttonHome {
     border-radius: 50px;
-        font-family: 'Baloo Thambi';
-        font-size: 24px;
-        width: 246px;
-        height: 41px;
-        background-color: #A7E1E9;
-        border-color: inherit;
+    font-family: 'Baloo Thambi';
+    font-size: 24px;
+    width: 246px;
+    height: 41px;
+    background-color: #FFE441;
+     border-color: inherit;
 }
 
-.buttonHome{
-    border-radius: 50px;
-        font-family: 'Baloo Thambi';
-        font-size: 24px;
-        width: 246px;
-        height: 41px;
-        background-color: #FFE441;
-        border-color: inherit;
+/*CSS DEL MURO*/
 
-}
-
-.muroDiv{
+.muroDiv {
     background-color: var(--melon);
     display: grid;
 }
@@ -284,13 +225,3 @@ padding-bottom: 30%;
     grid-template-columns: 10% 10%;
     justify-content: end;
 }
-
-.buttonLoginGoogle{
-    border-radius: 50px;
-        font-family: 'Baloo Thambi';
-        font-size: var(--font-size-button);
-        width: var(--width-buttons);
-        height: var(--height-buttons);
-        background-color: #ffffff;
-        border-color: inherit;
-    }

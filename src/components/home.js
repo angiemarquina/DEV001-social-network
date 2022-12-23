@@ -11,16 +11,15 @@ export const home = (onNavigate) => {
   buttonDiv.className = 'buttonDiv';
 
   const footprint = document.createElement('img');
-  footprint.src = './imagenes/patita.png';
+  footprint.src = './imagenes/logonaranja.png';
   footprint.alt = 'la huella de una patita';
   footprint.className = 'footprint';
-  const title = document.createElement('h1');
-  title.textContent = 'CoHabita';
-  title.className = 'title';
+
   const animals = document.createElement('img');
-  animals.className = 'animals';
   animals.src = './imagenes/animalestres.jpg';
   animals.alt = 'perro, gato y pajaro';
+  animals.className = 'animals';
+
   const pregunta = document.createElement('p');
   pregunta.textContent = '¿Ya tienes cuenta?';
 
@@ -29,26 +28,25 @@ export const home = (onNavigate) => {
 
   const buttonRegister = document.createElement('button');
   buttonRegister.className = 'buttonRegister';
+  buttonRegister.textContent = 'Crear cuenta';
+  buttonRegister.addEventListener('click', () => onNavigate('/register'));
+
   const buttonLogin = document.createElement('button');
   buttonLogin.className = 'buttonLogin';
-  const buttonLoginGoogle = document.createElement('button');
-  buttonLoginGoogle.className = 'buttonLoginGoogle';
-  buttonLoginGoogle.id = 'buttonLoginGoogle';
-  buttonLoginGoogle.type = 'button';
-
-  buttonRegister.textContent = 'Crear cuenta';
   buttonLogin.textContent = 'Ingresa';
-  buttonLoginGoogle.textContent = 'Google';
-
-  buttonRegister.addEventListener('click', () => onNavigate('/register'));
   buttonLogin.addEventListener('click', () => onNavigate('/login'));
+
+  const buttonLoginGoogle = document.createElement('button');
+  buttonLoginGoogle.id = 'buttonLoginGoogle';
+  buttonLoginGoogle.className = 'buttonLoginGoogle';
+  buttonLoginGoogle.type = 'button';
+  buttonLoginGoogle.textContent = 'Google';
 
   homeDiv.appendChild(logoDiv);
   homeDiv.appendChild(imageDiv);
   homeDiv.appendChild(buttonDiv);
 
   logoDiv.appendChild(footprint);
-  logoDiv.appendChild(title);
 
   imageDiv.appendChild(animals);
 

@@ -1,6 +1,8 @@
-// import { async } from 'regenerator-runtime';
+import { async } from 'regenerator-runtime';
 import { connectFirestoreEmulator } from 'firebase/firestore';
-import { saveTask, onGetTasks, deleteTask } from '../fiberbase/firebase.js';
+import {
+  saveTask, onGetTasks, deleteTask, getTask, updateTask,
+} from '../fiberbase/firebase.js';
 
 export const muro = (onNavigate) => {
   const muroDiv = document.createElement('main');
@@ -13,13 +15,9 @@ export const muro = (onNavigate) => {
   iconsPostDiv.className = 'iconsPostDiv';
 
   const footprint = document.createElement('img');
-  footprint.src = './imagenes/patitarosa.png';
+  footprint.src = './imagenes/logonaranja.png';
   footprint.alt = 'la huella de una patita';
   footprint.className = 'footprint';
-
-  const titleViewThree = document.createElement('h1');
-  titleViewThree.textContent = 'CoHabita';
-  titleViewThree.className = 'title';
 
   const formPost = document.createElement('form');
   formPost.id = 'formPost';
@@ -33,16 +31,6 @@ export const muro = (onNavigate) => {
   buttonToPost.id = 'buttonToPost';
   buttonToPost.textContent = 'Publicar';
 
-  // const likePost = document.createElement('img');
-  // likePost.src = './imagenes/like.png';
-  // likePost.alt = 'corazón para like';
-  // likePost.className = 'likePost';
-
-  // const editPost = document.createElement('img');
-  // editPost.src = './imagenes/edit.png';
-  // editPost.alt = 'icono de lapiz';
-  // editPost.className = 'editPost';
-
   const taskDiv = document.createElement('div');
   taskDiv.id = 'taskDiv';
 
@@ -55,7 +43,6 @@ export const muro = (onNavigate) => {
   muroDiv.appendChild(formPost);
 
   muroLogoDiv.appendChild(footprint);
-  muroLogoDiv.appendChild(titleViewThree);
 
   formPost.appendChild(muroPostsDiv);
   muroPostsDiv.appendChild(posts);
@@ -66,6 +53,9 @@ export const muro = (onNavigate) => {
   muroDiv.appendChild(buttonHome);
 
   const taskConteiner = muroDiv.querySelector('#taskDiv');
+  const taskForm = muroDiv.querySelector('#formPost');
+  let editStatus = false;
+  let id = '';
 
   window.addEventListener('DOMContentLoaded', async () => {
     onGetTasks((querySnapshot) => {
@@ -76,7 +66,7 @@ export const muro = (onNavigate) => {
      <div>
        <p>${task.postConteiner}</p>
        <img src='./imagenes/eliminar.png' class='img-delete' data-id='${doc.id}'>
-       
+       <img src='./imagenes/edit.png' class='img-edit' data-id='${doc.id}'>
      </div>
      `;
       });
@@ -88,18 +78,39 @@ export const muro = (onNavigate) => {
           deleteTask(dataset.id);
         });
       });
+
+      const imagesEdit = taskConteiner.querySelectorAll('.img-edit');
+      imagesEdit.forEach((img) => {
+        img.addEventListener('click', async (e) => {
+          const doc = await getTask(e.target.dataset.id);
+          const task = doc.data();
+
+          formPost.posts.value = task.postConteiner;
+          editStatus = true;
+          // es el mismo que el de la linea 96 pero más corto
+          id = doc.id;
+
+          formPost.buttonToPost.innerHTML = 'Actualizar';
+        });
+      });
     });
   });
-  // const querySnapshot = await getTasks();
-
-  const taskForm = muroDiv.querySelector('#formPost');
 
   taskForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
+    // POSTCONTEINER ES EL ESPACIO
     const postConteiner = taskForm.posts;
+    if (!editStatus) {
+      saveTask(postConteiner.value);
+    } else {
+      updateTask(id, {
+        postConteiner: postConteiner.value,
+      });
 
-    saveTask(postConteiner.value);
+      editStatus = false;
+    }
+
     taskForm.reset();
   });
   return muroDiv;
