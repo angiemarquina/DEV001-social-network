@@ -1,8 +1,9 @@
-import { async } from 'regenerator-runtime';
-import { saveTask, getTasks } from '../fiberbase/firebase.js';
+// import { async } from 'regenerator-runtime';
+import { connectFirestoreEmulator } from 'firebase/firestore';
+import { saveTask, onGetTasks, deleteTask } from '../fiberbase/firebase.js';
 
 export const muro = (onNavigate) => {
-  const muroDiv = document.createElement('div');
+  const muroDiv = document.createElement('main');
   muroDiv.className = 'muroDiv';
   const muroLogoDiv = document.createElement('div');
   muroLogoDiv.className = 'muroLogoDiv';
@@ -42,11 +43,6 @@ export const muro = (onNavigate) => {
   // editPost.alt = 'icono de lapiz';
   // editPost.className = 'editPost';
 
-  const deletePost = document.createElement('img');
-  deletePost.src = './imagenes/eliminar.png';
-  deletePost.alt = 'icono de bote de basura';
-  deletePost.className = 'deletePost';
-
   const taskDiv = document.createElement('div');
   taskDiv.id = 'taskDiv';
 
@@ -64,27 +60,37 @@ export const muro = (onNavigate) => {
   formPost.appendChild(muroPostsDiv);
   muroPostsDiv.appendChild(posts);
   muroPostsDiv.appendChild(iconsPostDiv);
-  iconsPostDiv.appendChild(deletePost);
   iconsPostDiv.appendChild(buttonToPost);
 
   muroDiv.appendChild(taskDiv);
   muroDiv.appendChild(buttonHome);
 
-  const taskConteiner = muroDiv.querySelector('#taskDiv')
+  const taskConteiner = muroDiv.querySelector('#taskDiv');
 
   window.addEventListener('DOMContentLoaded', async () => {
-    const querySnapshot = await getTasks();
-    let html = '';
-    querySnapshot.forEach((doc) => {
-      const task = doc.data();
-      html += `
+    onGetTasks((querySnapshot) => {
+      let html = '';
+      querySnapshot.forEach((doc) => {
+        const task = doc.data();
+        html += `
      <div>
        <p>${task.postConteiner}</p>
+       <img src='./imagenes/eliminar.png' class='img-delete' data-id='${doc.id}'>
+       
      </div>
      `;
+      });
+      taskConteiner.innerHTML = html;
+
+      const imagesDelete = taskConteiner.querySelectorAll('.img-delete');
+      imagesDelete.forEach((img) => {
+        img.addEventListener('click', ({ target: { dataset } }) => {
+          deleteTask(dataset.id);
+        });
+      });
     });
-    taskConteiner.innerHTML = html;
   });
+  // const querySnapshot = await getTasks();
 
   const taskForm = muroDiv.querySelector('#formPost');
 

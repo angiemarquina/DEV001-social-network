@@ -1,7 +1,7 @@
 import { signIn } from '../fiberbase/firebase.js';
 
 export const login = (onNavigate) => {
-  const loginDiv = document.createElement('div');
+  const loginDiv = document.createElement('main');
   loginDiv.className = 'loginDiv';
   const footprintDivTwo = document.createElement('div');
   footprintDivTwo.className = 'footprintDiv';

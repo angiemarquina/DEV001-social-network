@@ -69,6 +69,13 @@ body {
         background-color: #FFE441;
         border-color: inherit;
 }
+p{
+    color: var(--gray);
+    font-family: 'Baloo Thambi';
+    font-size: var(--font-size-pequeña);
+    display: flex;
+    justify-content: center;
+}
 .footprintDiv{
     display: flex;
     justify-content: flex-end;
@@ -82,7 +89,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--amarillo);
+    background-color: var(--verdesito);
     border-radius: 20px;
     padding-bottom: 30%;
 }
@@ -99,7 +106,7 @@ body {
 .mailViewTwo{
     font-size: var(--font-size-button);
     font-family: 'Baloo Thambi';
-    color:var(--celestito);
+    
     border: none;
     border-bottom: 4px solid #797575;
     width: 245px;
@@ -107,7 +114,7 @@ body {
 
 }
 .mailViewTwo::placeholder{
-    color: var(--celestito);
+    color:#1c86e8;
 }
 .passwordViewTwo{
     font-size: var(--font-size-button);
@@ -119,7 +126,7 @@ body {
     background-color: var(--white-forms);
 }
 .passwordViewTwo::placeholder{
-    color:var(--celestito);
+    color:#1c86e8;
 }
 .buttonLoginViewTwo{
     border-radius: 50px;
@@ -142,7 +149,7 @@ body {
     font-size: var(--font-size-button);
     width:var(--width-buttons);
     height:var(--height-buttons);
-    background-color: var(--celestito);
+    background-color: var(--melon);
     border-color: inherit;
 }
 
@@ -189,7 +196,7 @@ padding-bottom: 30%;
 }
 
 .name::placeholder{
-    color: #A7E1E9;
+    color: #1c86e8;
     font-size: 24px;
    padding-left: 10px;
 }
@@ -206,7 +213,7 @@ padding-bottom: 30%;
     
 }
 .mail::placeholder{
-    color:#A7E1E9;
+    color:#1c86e8;
     font-size: 24px;
     padding-left: 10px;
 }
@@ -223,7 +230,7 @@ padding-bottom: 30%;
     
 }
 .password::placeholder{
-    color: #A7E1E9;
+    color: #1c86e8;
     font-size: 24px;
     padding-left: 10px;
 }
@@ -278,4 +285,12 @@ padding-bottom: 30%;
     justify-content: end;
 }
 
-
+.buttonLoginGoogle{
+    border-radius: 50px;
+        font-family: 'Baloo Thambi';
+        font-size: var(--font-size-button);
+        width: var(--width-buttons);
+        height: var(--height-buttons);
+        background-color: #ffffff;
+        border-color: inherit;
+    }

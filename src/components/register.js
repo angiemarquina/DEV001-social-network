@@ -1,7 +1,7 @@
 import { signUp } from '../fiberbase/firebase';
 
 export const register = (onNavigate) => {
-  const registerDiv = document.createElement('div');
+  const registerDiv = document.createElement('main');
   registerDiv.className = 'registerDiv';
   const logoDivViewThree = document.createElement('div');
   logoDivViewThree.className = 'logoDiv';

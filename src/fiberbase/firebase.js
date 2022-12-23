@@ -13,6 +13,9 @@ import {
   collection,
   addDoc,
   getDocs,
+  onSnapshot,
+  deleteDoc,
+  doc,
 } from 'firebase/firestore';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -47,3 +50,5 @@ export const saveTask = (postConteiner) => {
   addDoc(collection(db, 'posts'), { postConteiner });
 };
 export const getTasks = () => getDocs(collection(db, 'posts'));
+export const onGetTasks = (callback) => onSnapshot(collection(db, 'posts'), callback);
+export const deleteTask = (id) => deleteDoc(doc(db, 'posts', id));
