@@ -7,6 +7,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signInWithEmailAndPassword,
+  signOut,
 } from 'firebase/auth';
 import {
   getFirestore,
@@ -46,6 +47,7 @@ export const loginGoogle = () => {
   return signInWithPopup(auth, provider);
 };
 export const signIn = (email, password) => signInWithEmailAndPassword(auth, email, password);
+export const LogOut = () => signOut(auth);
 
 // Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(app);
