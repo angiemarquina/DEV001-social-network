@@ -222,6 +222,39 @@ p {
 
 .iconsPostDiv {
     display: grid;
-    grid-template-columns: 10% 10%;
     justify-content: end;
+}
+
+.buttonToPost {
+    border-radius: 50px;
+    font-family: 'Baloo Thambi';
+    font-size: 24px;
+    width: 125px;
+    height: 41px;
+    background-color: var(--celestito);
+     border-color: inherit;
+}
+
+.publicaciones {
+    margin: 15px;
+    background-color: var(--white);
+    border-radius: 10px;
+}
+
+.contenedorIcons {
+    display: grid;
+    grid-template-columns: 30px 30px 30px;
+    justify-content: end;
+}
+
+.buttonLogout {
+    border-radius: 50px;
+    font-family: 'Baloo Thambi';
+    font-size: 24px;
+    width: 150px;
+    height: 41px;
+    background-color: var(--amarillo);
+    border-color: inherit;
+    display: flex;
+    justify-content: center;
 }

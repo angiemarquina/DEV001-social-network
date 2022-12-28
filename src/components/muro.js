@@ -1,7 +1,7 @@
 import { async } from 'regenerator-runtime';
 import { connectFirestoreEmulator } from 'firebase/firestore';
 import {
-  saveTask, onGetTasks, deleteTask, getTask, updateTask,
+  saveTask, onGetTasks, deleteTask, getTask, updateTask, LogOut,
 } from '../fiberbase/firebase.js';
 
 export const muro = (onNavigate) => {
@@ -29,15 +29,17 @@ export const muro = (onNavigate) => {
 
   const buttonToPost = document.createElement('button');
   buttonToPost.id = 'buttonToPost';
+  buttonToPost.className = 'buttonToPost';
   buttonToPost.textContent = 'Publicar';
 
   const taskDiv = document.createElement('div');
   taskDiv.id = 'taskDiv';
 
-  const buttonHome = document.createElement('button');
-  buttonHome.textContent = 'Regresar al Home';
-  buttonHome.className = 'buttonHome';
-  buttonHome.addEventListener('click', () => onNavigate('/'));
+  const buttonLogout = document.createElement('button');
+  buttonLogout.id = 'buttonLogout';
+  buttonLogout.textContent = 'Log out';
+  buttonLogout.className = 'buttonLogout';
+  // buttonHome.addEventListener('click', () => onNavigate('/'));
 
   muroDiv.appendChild(muroLogoDiv);
   muroDiv.appendChild(formPost);
@@ -50,7 +52,7 @@ export const muro = (onNavigate) => {
   iconsPostDiv.appendChild(buttonToPost);
 
   muroDiv.appendChild(taskDiv);
-  muroDiv.appendChild(buttonHome);
+  muroDiv.appendChild(buttonLogout);
 
   const taskConteiner = muroDiv.querySelector('#taskDiv');
   const taskForm = muroDiv.querySelector('#formPost');
@@ -63,10 +65,13 @@ export const muro = (onNavigate) => {
       querySnapshot.forEach((doc) => {
         const task = doc.data();
         html += `
-     <div>
+     <div class = 'publicaciones'>
        <p>${task.postConteiner}</p>
-       <img src='./imagenes/eliminar.png' class='img-delete' data-id='${doc.id}'>
-       <img src='./imagenes/edit.png' class='img-edit' data-id='${doc.id}'>
+       <div class = 'contenedorIcons'>
+       <img src='./imagenes/heart1_icon.png' class='img-like'>
+       <img src='./imagenes/edit_icon.png' class='img-edit' data-id='${doc.id}'>
+       <img src='./imagenes/trash_icon.png' class='img-delete' data-id='${doc.id}'>
+       </div>
      </div>
      `;
       });
@@ -113,5 +118,19 @@ export const muro = (onNavigate) => {
 
     taskForm.reset();
   });
+
+  const cerrarSesion = muroDiv.querySelector('#buttonLogout');
+  cerrarSesion.addEventListener('click', (e) => {
+    e.preventDefault();
+    LogOut().then(() => {
+      // Sign-out successful.
+      console.log('siii saliste');
+      onNavigate('/');
+    }).catch(() => {
+      // An error happened.
+      console.log('que mala onda, hubo un error');
+    });
+  });
+
   return muroDiv;
 };
