@@ -1,7 +1,7 @@
 import { async } from 'regenerator-runtime';
 import { connectFirestoreEmulator } from 'firebase/firestore';
 import {
-  saveTask, onGetTasks, deleteTask, getTask, updateTask, LogOut,
+  saveTask, onGetTasks, deleteTask, getTask, updateTask, logOut, currentUser,
 } from '../fiberbase/firebase.js';
 
 export const muro = (onNavigate) => {
@@ -59,70 +59,111 @@ export const muro = (onNavigate) => {
   let editStatus = false;
   let id = '';
 
+  // PERMITE QUE SE REALICEN LAS TAREAS Y LAS FUNCIONES
   window.addEventListener('DOMContentLoaded', async () => {
     onGetTasks((querySnapshot) => {
       let html = '';
+
       querySnapshot.forEach((doc) => {
-        const task = doc.data();
-        html += `
-     <div class = 'publicaciones'>
-       <p>${task.postConteiner}</p>
-       <div class = 'contenedorIcons'>
-       <img src='./imagenes/heart1_icon.png' class='img-like'>
-       <img src='./imagenes/edit_icon.png' class='img-edit' data-id='${doc.id}'>
-       <img src='./imagenes/trash_icon.png' class='img-delete' data-id='${doc.id}'>
-       </div>
-     </div>
-     `;
+        const dataPost = doc.data();
+        const time = dataPost.date.seconds;
+        const datePost = new Date(time * 1000);
+        if (dataPost.uid === currentUser().uid) {
+          html += `
+            <div class = 'publicaciones'>
+              <p>${dataPost.postConteiner}</p>
+              <p> ${datePost}</p>
+              <div class = 'contenedorIcons'>
+                <img src='./imagenes/edit_icon.png' class='img-edit' data-id='${doc.id}'>
+                <img src='./imagenes/trash_icon.png' class='img-delete' data-id='${doc.id}'>
+              </div>
+            </div>
+          `;
+        } else {
+          html += `
+            <div class = 'publicaciones'>
+              <p>${dataPost.postConteiner}</p>
+              <p> ${datePost}</p>
+            </div>
+          `;
+        }
       });
+
       taskConteiner.innerHTML = html;
 
-      const imagesDelete = taskConteiner.querySelectorAll('.img-delete');
-      imagesDelete.forEach((img) => {
-        img.addEventListener('click', ({ target: { dataset } }) => {
-          deleteTask(dataset.id);
-        });
-      });
+      // MANDA A LLAMAR LA IMG CORAZÓN Y LUEGO PERMITE LIKEAR
+      // const btnsLike = taskConteiner.querySelectorAll('img-like');
+      // btnsLike.forEach((btn) => {
+      // btn.addEventListener('click', (e) => {
+      //     const idLike = await getTask(e.target.dataset.id);
+      //     idLike.then((res) => {
+      //       const likes = res.data();
+      //       if (likes.length === 0) {
+      //         likes.push((currentUser().email));
+      //       } else if (!likes.includes(currentUser().email)) {
+      //         likes.push((currentUser().email));
+      //       } else {
+      //         likes = likes.filter((email) => !email.includes(currentUser().email));
+      //       }
+      //       updateTask(idLike, { likes });
+      //     });
+      //   });
+      // });
 
-      const imagesEdit = taskConteiner.querySelectorAll('.img-edit');
-      imagesEdit.forEach((img) => {
-        img.addEventListener('click', async (e) => {
+      // MANDA A LLAMAR LA IMG EDIT Y LUEGO PERMITE EDITAR
+      const btnsEdit = taskConteiner.querySelectorAll('.img-edit');
+      btnsEdit.forEach((btn) => {
+        btn.addEventListener('click', async (e) => {
           const doc = await getTask(e.target.dataset.id);
-          const task = doc.data();
+          // const uid = currentUserInfo().uid;
+          // console.log(uid)
+          console.log(doc);
+          const dataPost = doc.data();
 
-          formPost.posts.value = task.postConteiner;
+          formPost.posts.value = dataPost.postConteiner;
           editStatus = true;
-          // es el mismo que el de la linea 96 pero más corto
           id = doc.id;
 
           formPost.buttonToPost.innerHTML = 'Actualizar';
         });
       });
+
+      // NOS PERMITE EDITAR
+      taskForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const postConteiner = taskForm.posts;
+        // const uid = currentUser().uid;
+        // console.log(uid);
+
+        if (!editStatus) {
+          saveTask(postConteiner.value);
+        } else {
+          updateTask(id, {
+            postConteiner: postConteiner.value,
+          });
+
+          editStatus = false;
+        }
+
+        taskForm.reset();
+      });
+
+      // MANDA A LLAMAR LA IMG BORRAR Y LUEGO PERMITE BORRAR
+      const btnsDelete = taskConteiner.querySelectorAll('.img-delete');
+      btnsDelete.forEach((btn) => {
+        btn.addEventListener('click', ({ target: { dataset } }) => {
+          deleteTask(dataset.id);
+        });
+      });
+      //
     });
   });
 
-  taskForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    // POSTCONTEINER ES EL ESPACIO
-    const postConteiner = taskForm.posts;
-    if (!editStatus) {
-      saveTask(postConteiner.value);
-    } else {
-      updateTask(id, {
-        postConteiner: postConteiner.value,
-      });
-
-      editStatus = false;
-    }
-
-    taskForm.reset();
-  });
-
+  // PERMITE CERRAR SESION AL USUARIO
   const cerrarSesion = muroDiv.querySelector('#buttonLogout');
   cerrarSesion.addEventListener('click', (e) => {
     e.preventDefault();
-    LogOut().then(() => {
+    logOut().then(() => {
       // Sign-out successful.
       console.log('siii saliste');
       onNavigate('/');
