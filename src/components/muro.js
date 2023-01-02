@@ -67,12 +67,12 @@ export const muro = (onNavigate) => {
       querySnapshot.forEach((doc) => {
         const dataPost = doc.data();
         const time = dataPost.date.seconds;
-        const datePost = new Date(time * 1000);
-        if (dataPost.uid === currentUser().uid) {
+        const objectoAccion = new Date(time * 1000);
+        if (doc.uid === currentUser().uid) {
           html += `
             <div class = 'publicaciones'>
               <p>${dataPost.postConteiner}</p>
-              <p> ${datePost}</p>
+              <h6 class='date'> ${objectoAccion}</h6>
               <div class = 'contenedorIcons'>
                 <img src='./imagenes/edit_icon.png' class='img-edit' data-id='${doc.id}'>
                 <img src='./imagenes/trash_icon.png' class='img-delete' data-id='${doc.id}'>
@@ -83,7 +83,7 @@ export const muro = (onNavigate) => {
           html += `
             <div class = 'publicaciones'>
               <p>${dataPost.postConteiner}</p>
-              <p> ${datePost}</p>
+              <h6 class='date'> ${objectoAccion}</h6>
             </div>
           `;
         }
@@ -115,9 +115,6 @@ export const muro = (onNavigate) => {
       btnsEdit.forEach((btn) => {
         btn.addEventListener('click', async (e) => {
           const doc = await getTask(e.target.dataset.id);
-          // const uid = currentUserInfo().uid;
-          // console.log(uid)
-          console.log(doc);
           const dataPost = doc.data();
 
           formPost.posts.value = dataPost.postConteiner;
@@ -132,11 +129,10 @@ export const muro = (onNavigate) => {
       taskForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const postConteiner = taskForm.posts;
-        // const uid = currentUser().uid;
-        // console.log(uid);
+        const uid = currentUser().uid;
 
         if (!editStatus) {
-          saveTask(postConteiner.value);
+          saveTask(postConteiner.value, uid);
         } else {
           updateTask(id, {
             postConteiner: postConteiner.value,
