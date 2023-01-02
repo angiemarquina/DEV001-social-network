@@ -41,6 +41,8 @@ export const app = initializeApp(firebaseConfig);
 export const analytics = getAnalytics(app);
 
 export const auth = getAuth(app);
+export const currentUser = () => auth.currentUser;
+
 export const signUp = (email, password) => createUserWithEmailAndPassword(auth, email, password);
 export const loginGoogle = () => {
   const provider = new GoogleAuthProvider();

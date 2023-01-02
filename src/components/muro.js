@@ -1,7 +1,7 @@
 import { async } from 'regenerator-runtime';
 import { connectFirestoreEmulator } from 'firebase/firestore';
 import {
-  saveTask, onGetTasks, deleteTask, getTask, updateTask, LogOut,
+  saveTask, onGetTasks, deleteTask, getTask, updateTask, LogOut, currentUser,
 } from '../fiberbase/firebase.js';
 
 export const muro = (onNavigate) => {
@@ -64,6 +64,13 @@ export const muro = (onNavigate) => {
       let html = '';
       querySnapshot.forEach((doc) => {
         const task = doc.data();
+        const idPost = doc.id;
+        console.log(idPost, 'este es el id');
+        
+        if(idPost == currentUser()){
+          
+
+        }
         html += `
      <div class = 'publicaciones'>
        <p>${task.postConteiner}</p>
@@ -76,6 +83,11 @@ export const muro = (onNavigate) => {
      `;
       });
       taskConteiner.innerHTML = html;
+      // Decidir en qué lugar poner la función con condicional
+      // Obtener el id de usuario mediante el currentUser
+      // Obtener el ID del post
+      // Una condicional que valide que el usuarioactual(el logeado)coincida
+      // con los id de los post que el crea
 
       const imagesDelete = taskConteiner.querySelectorAll('.img-delete');
       imagesDelete.forEach((img) => {
