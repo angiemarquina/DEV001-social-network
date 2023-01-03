@@ -13,7 +13,6 @@ import {
   getFirestore,
   collection,
   addDoc,
-  getDocs,
   onSnapshot,
   deleteDoc,
   doc,
@@ -56,16 +55,17 @@ export const logOut = () => signOut(auth);
 
 // Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(app);
-export const saveTask = (postConteiner) => {
-  addDoc(collection(db, 'posts'), { postConteiner });
-};
-export const getTasks = () => getDocs(collection(db, 'posts'));
-// export const onGetTasks = (callback) => onSnapshot(collection(db, 'posts'), callback);
-export const onGetTasks = (querySnapshot) => {
-  const queryPost = query(collection(db, 'posts'), orderBy('date', 'desc'));
-  onSnapshot(queryPost, querySnapshot);
+export const savePost = (postConteiner, userUid, profilePhoto, userName, date) => {
+  addDoc(collection(db, 'posts'), {
+    postConteiner, userUid, profilePhoto, userName, date,
+  });
 };
 
-export const deleteTask = (id) => deleteDoc(doc(db, 'posts', id));
-export const getTask = (id) => getDoc(doc(db, 'posts', id));
-export const updateTask = (id, newFields) => updateDoc(doc(db, 'posts', id), newFields);
+export const onGetPosts = (callback) => {
+  const queryPost = query(collection(db, 'posts'), orderBy('date', 'desc'));
+  onSnapshot(queryPost, callback);
+};
+
+export const deletePost = (id) => deleteDoc(doc(db, 'posts', id));
+export const getPost = (id) => getDoc(doc(db, 'posts', id));
+export const updatePost = (id, newFields) => updateDoc(doc(db, 'posts', id), newFields);

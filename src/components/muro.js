@@ -1,7 +1,7 @@
 import { async } from 'regenerator-runtime';
 import { connectFirestoreEmulator } from 'firebase/firestore';
 import {
-  saveTask, onGetTasks, deleteTask, getTask, updateTask, logOut, currentUser,
+  savePost, onGetPosts, deletePost, getPost, updatePost, logOut, currentUser,
 } from '../fiberbase/firebase.js';
 
 export const muro = (onNavigate) => {
@@ -26,6 +26,7 @@ export const muro = (onNavigate) => {
   posts.placeholder = 'Agrega un post...';
   posts.className = 'posts';
   posts.id = 'posts';
+  // agregar un condicional que solo postee cuando este lleno
 
   const buttonToPost = document.createElement('button');
   buttonToPost.id = 'buttonToPost';
@@ -39,7 +40,6 @@ export const muro = (onNavigate) => {
   buttonLogout.id = 'buttonLogout';
   buttonLogout.textContent = 'Log out';
   buttonLogout.className = 'buttonLogout';
-  // buttonHome.addEventListener('click', () => onNavigate('/'));
 
   muroDiv.appendChild(muroLogoDiv);
   muroDiv.appendChild(formPost);
@@ -61,18 +61,22 @@ export const muro = (onNavigate) => {
 
   // PERMITE QUE SE REALICEN LAS TAREAS Y LAS FUNCIONES
   window.addEventListener('DOMContentLoaded', async () => {
-    onGetTasks((querySnapshot) => {
+    onGetPosts((querySnapshot) => {
       let html = '';
-
+      console.log(querySnapshot);
       querySnapshot.forEach((doc) => {
         const dataPost = doc.data();
+        console.log(dataPost);
         const time = dataPost.date.seconds;
+        console.log(time);
         const objectoAccion = new Date(time * 1000);
-        if (doc.uid === currentUser().uid) {
+        if (dataPost.userUid === currentUser().uid) {
           html += `
             <div class = 'publicaciones'>
+              <img src='${dataPost.profilePhoto}'>
+              <p>${dataPost.userName}</p>
+              <p>${objectoAccion}</p>
               <p>${dataPost.postConteiner}</p>
-              <h6 class='date'> ${objectoAccion}</h6>
               <div class = 'contenedorIcons'>
                 <img src='./imagenes/edit_icon.png' class='img-edit' data-id='${doc.id}'>
                 <img src='./imagenes/trash_icon.png' class='img-delete' data-id='${doc.id}'>
@@ -82,8 +86,10 @@ export const muro = (onNavigate) => {
         } else {
           html += `
             <div class = 'publicaciones'>
-              <p>${dataPost.postConteiner}</p>
-              <h6 class='date'> ${objectoAccion}</h6>
+            <img src='${dataPost.profilePhoto}'>
+            <p>${dataPost.userName}</p>
+            <p>${objectoAccion}</p>
+            <p>${dataPost.postConteiner}</p>
             </div>
           `;
         }
@@ -91,30 +97,11 @@ export const muro = (onNavigate) => {
 
       taskConteiner.innerHTML = html;
 
-      // MANDA A LLAMAR LA IMG CORAZÓN Y LUEGO PERMITE LIKEAR
-      // const btnsLike = taskConteiner.querySelectorAll('img-like');
-      // btnsLike.forEach((btn) => {
-      // btn.addEventListener('click', (e) => {
-      //     const idLike = await getTask(e.target.dataset.id);
-      //     idLike.then((res) => {
-      //       const likes = res.data();
-      //       if (likes.length === 0) {
-      //         likes.push((currentUser().email));
-      //       } else if (!likes.includes(currentUser().email)) {
-      //         likes.push((currentUser().email));
-      //       } else {
-      //         likes = likes.filter((email) => !email.includes(currentUser().email));
-      //       }
-      //       updateTask(idLike, { likes });
-      //     });
-      //   });
-      // });
-
       // MANDA A LLAMAR LA IMG EDIT Y LUEGO PERMITE EDITAR
       const btnsEdit = taskConteiner.querySelectorAll('.img-edit');
       btnsEdit.forEach((btn) => {
         btn.addEventListener('click', async (e) => {
-          const doc = await getTask(e.target.dataset.id);
+          const doc = await getPost(e.target.dataset.id);
           const dataPost = doc.data();
 
           formPost.posts.value = dataPost.postConteiner;
@@ -125,16 +112,21 @@ export const muro = (onNavigate) => {
         });
       });
 
-      // NOS PERMITE EDITAR
       taskForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        formPost.buttonToPost.innerHTML = 'Publicar';
+        // hacer un ternario para que de actualizar pase a publicar
+
         const postConteiner = taskForm.posts;
-        const uid = currentUser().uid;
+        const userUid = currentUser().uid;
+        const profilePhoto = currentUser().photoURL;
+        const userName = currentUser().displayName;
+        const date = new Date();
 
         if (!editStatus) {
-          saveTask(postConteiner.value, uid);
+          savePost(postConteiner.value, userUid, profilePhoto, userName, date);
         } else {
-          updateTask(id, {
+          updatePost(id, {
             postConteiner: postConteiner.value,
           });
 
@@ -148,7 +140,7 @@ export const muro = (onNavigate) => {
       const btnsDelete = taskConteiner.querySelectorAll('.img-delete');
       btnsDelete.forEach((btn) => {
         btn.addEventListener('click', ({ target: { dataset } }) => {
-          deleteTask(dataset.id);
+          deletePost(dataset.id);
         });
       });
       //

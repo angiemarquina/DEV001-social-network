@@ -95,6 +95,7 @@ export const register = (onNavigate) => {
     const passwordR = signupRForm.passwordRegister.value;
     console.log(nameR, registerR, passwordR);
 
+    // agregar un updateprofile en el then del signUp para el nombre y foto default
     signUp(registerR, passwordR)
       .then((userCredential) => {
         // Signed in
