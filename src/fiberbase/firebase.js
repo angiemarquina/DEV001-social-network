@@ -13,12 +13,13 @@ import {
   getFirestore,
   collection,
   addDoc,
-  getDocs,
   onSnapshot,
   deleteDoc,
   doc,
   getDoc,
   updateDoc,
+  query,
+  orderBy,
 } from 'firebase/firestore';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -36,10 +37,11 @@ const firebaseConfig = {
   measurementId: 'G-KXDBB151F2',
 };
 
-// Initialize Firebase
+// Inicializa Firebase
 export const app = initializeApp(firebaseConfig);
 export const analytics = getAnalytics(app);
 
+// Autentica Firebase
 export const auth = getAuth(app);
 export const currentUser = () => auth.currentUser;
 
@@ -49,15 +51,21 @@ export const loginGoogle = () => {
   return signInWithPopup(auth, provider);
 };
 export const signIn = (email, password) => signInWithEmailAndPassword(auth, email, password);
-export const LogOut = () => signOut(auth);
+export const logOut = () => signOut(auth);
 
 // Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(app);
-export const saveTask = (postConteiner) => {
-  addDoc(collection(db, 'posts'), { postConteiner });
+export const savePost = (postConteiner, userUid, profilePhoto, userName, date) => {
+  addDoc(collection(db, 'posts'), {
+    postConteiner, userUid, profilePhoto, userName, date,
+  });
 };
-export const getTasks = () => getDocs(collection(db, 'posts'));
-export const onGetTasks = (callback) => onSnapshot(collection(db, 'posts'), callback);
-export const deleteTask = (id) => deleteDoc(doc(db, 'posts', id));
-export const getTask = (id) => getDoc(doc(db, 'posts', id));
-export const updateTask = (id, newFields) => updateDoc(doc(db, 'posts', id), newFields);
+
+export const onGetPosts = (callback) => {
+  const queryPost = query(collection(db, 'posts'), orderBy('date', 'desc'));
+  onSnapshot(queryPost, callback);
+};
+
+export const deletePost = (id) => deleteDoc(doc(db, 'posts', id));
+export const getPost = (id) => getDoc(doc(db, 'posts', id));
+export const updatePost = (id, newFields) => updateDoc(doc(db, 'posts', id), newFields);

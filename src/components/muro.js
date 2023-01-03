@@ -1,7 +1,7 @@
 import { async } from 'regenerator-runtime';
 import { connectFirestoreEmulator } from 'firebase/firestore';
 import {
-  saveTask, onGetTasks, deleteTask, getTask, updateTask, LogOut, currentUser,
+  savePost, onGetPosts, deletePost, getPost, updatePost, logOut, currentUser,
 } from '../fiberbase/firebase.js';
 
 export const muro = (onNavigate) => {
@@ -26,6 +26,7 @@ export const muro = (onNavigate) => {
   posts.placeholder = 'Agrega un post...';
   posts.className = 'posts';
   posts.id = 'posts';
+  // agregar un condicional que solo postee cuando este lleno
 
   const buttonToPost = document.createElement('button');
   buttonToPost.id = 'buttonToPost';
@@ -39,7 +40,6 @@ export const muro = (onNavigate) => {
   buttonLogout.id = 'buttonLogout';
   buttonLogout.textContent = 'Log out';
   buttonLogout.className = 'buttonLogout';
-  // buttonHome.addEventListener('click', () => onNavigate('/'));
 
   muroDiv.appendChild(muroLogoDiv);
   muroDiv.appendChild(formPost);
@@ -59,82 +59,99 @@ export const muro = (onNavigate) => {
   let editStatus = false;
   let id = '';
 
+  // PERMITE QUE SE REALICEN LAS TAREAS Y LAS FUNCIONES
   window.addEventListener('DOMContentLoaded', async () => {
-    onGetTasks((querySnapshot) => {
+    onGetPosts((querySnapshot) => {
       let html = '';
+      console.log(querySnapshot);
       querySnapshot.forEach((doc) => {
-        const task = doc.data();
-        const idPost = doc.id;
-        console.log(idPost, 'este es el id');
-        
-        if(idPost == currentUser()){
-          
-
+        const dataPost = doc.data();
+        console.log(dataPost);
+        const time = dataPost.date.seconds;
+        console.log(time);
+        const objectoAccion = new Date(time * 1000);
+        if (dataPost.userUid === currentUser().uid) {
+          html += `
+            <div class = 'publicaciones'>
+              <img src='${dataPost.profilePhoto}'>
+              <p>${dataPost.userName}</p>
+              <p>${objectoAccion}</p>
+              <p>${dataPost.postConteiner}</p>
+              <div class = 'contenedorIcons'>
+                <img src='./imagenes/edit_icon.png' class='img-edit' data-id='${doc.id}'>
+                <img src='./imagenes/trash_icon.png' class='img-delete' data-id='${doc.id}'>
+              </div>
+            </div>
+          `;
+        } else {
+          html += `
+            <div class = 'publicaciones'>
+            <img src='${dataPost.profilePhoto}'>
+            <p>${dataPost.userName}</p>
+            <p>${objectoAccion}</p>
+            <p>${dataPost.postConteiner}</p>
+            </div>
+          `;
         }
-        html += `
-     <div class = 'publicaciones'>
-       <p>${task.postConteiner}</p>
-       <div class = 'contenedorIcons'>
-       <img src='./imagenes/heart1_icon.png' class='img-like'>
-       <img src='./imagenes/edit_icon.png' class='img-edit' data-id='${doc.id}'>
-       <img src='./imagenes/trash_icon.png' class='img-delete' data-id='${doc.id}'>
-       </div>
-     </div>
-     `;
       });
+
       taskConteiner.innerHTML = html;
-      // Decidir en qué lugar poner la función con condicional
-      // Obtener el id de usuario mediante el currentUser
-      // Obtener el ID del post
-      // Una condicional que valide que el usuarioactual(el logeado)coincida
-      // con los id de los post que el crea
 
-      const imagesDelete = taskConteiner.querySelectorAll('.img-delete');
-      imagesDelete.forEach((img) => {
-        img.addEventListener('click', ({ target: { dataset } }) => {
-          deleteTask(dataset.id);
-        });
-      });
+      // MANDA A LLAMAR LA IMG EDIT Y LUEGO PERMITE EDITAR
+      const btnsEdit = taskConteiner.querySelectorAll('.img-edit');
+      btnsEdit.forEach((btn) => {
+        btn.addEventListener('click', async (e) => {
+          const doc = await getPost(e.target.dataset.id);
+          const dataPost = doc.data();
 
-      const imagesEdit = taskConteiner.querySelectorAll('.img-edit');
-      imagesEdit.forEach((img) => {
-        img.addEventListener('click', async (e) => {
-          const doc = await getTask(e.target.dataset.id);
-          const task = doc.data();
-
-          formPost.posts.value = task.postConteiner;
+          formPost.posts.value = dataPost.postConteiner;
           editStatus = true;
-          // es el mismo que el de la linea 96 pero más corto
           id = doc.id;
 
           formPost.buttonToPost.innerHTML = 'Actualizar';
         });
       });
+
+      taskForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        formPost.buttonToPost.innerHTML = 'Publicar';
+        // hacer un ternario para que de actualizar pase a publicar
+
+        const postConteiner = taskForm.posts;
+        const userUid = currentUser().uid;
+        const profilePhoto = currentUser().photoURL;
+        const userName = currentUser().displayName;
+        const date = new Date();
+
+        if (!editStatus) {
+          savePost(postConteiner.value, userUid, profilePhoto, userName, date);
+        } else {
+          updatePost(id, {
+            postConteiner: postConteiner.value,
+          });
+
+          editStatus = false;
+        }
+
+        taskForm.reset();
+      });
+
+      // MANDA A LLAMAR LA IMG BORRAR Y LUEGO PERMITE BORRAR
+      const btnsDelete = taskConteiner.querySelectorAll('.img-delete');
+      btnsDelete.forEach((btn) => {
+        btn.addEventListener('click', ({ target: { dataset } }) => {
+          deletePost(dataset.id);
+        });
+      });
+      //
     });
   });
 
-  taskForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    // POSTCONTEINER ES EL ESPACIO
-    const postConteiner = taskForm.posts;
-    if (!editStatus) {
-      saveTask(postConteiner.value);
-    } else {
-      updateTask(id, {
-        postConteiner: postConteiner.value,
-      });
-
-      editStatus = false;
-    }
-
-    taskForm.reset();
-  });
-
+  // PERMITE CERRAR SESION AL USUARIO
   const cerrarSesion = muroDiv.querySelector('#buttonLogout');
   cerrarSesion.addEventListener('click', (e) => {
     e.preventDefault();
-    LogOut().then(() => {
+    logOut().then(() => {
       // Sign-out successful.
       console.log('siii saliste');
       onNavigate('/');
