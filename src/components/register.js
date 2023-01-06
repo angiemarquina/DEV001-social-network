@@ -64,6 +64,7 @@ export const register = (onNavigate) => {
   buttonRegister.textContent = 'Registar';
   buttonRegister.className = 'buttonRegister';
   buttonRegister.type = 'submit';
+  buttonRegister.id = 'buttonRegister';
 
   const buttonHome = document.createElement('button');
   buttonHome.textContent = 'Regresar al Home';
@@ -87,6 +88,11 @@ export const register = (onNavigate) => {
 
   const signupRForm = registerDiv.querySelector('#formR');
   console.log(signupRForm);
+  // x({x:"hola"})
+
+  // const x = (e) => console.log()
+
+  // signupRForm.addEventListener('submit', x)
 
   signupRForm.addEventListener('submit', (e) => {
     e.preventDefault();

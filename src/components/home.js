@@ -61,7 +61,7 @@ export const home = (onNavigate) => {
   googleButton.addEventListener('click', () => {
     loginGoogle()
       .then((credentials) => {
-        console.log(credentials);
+        console.log(credentials, 'aqui estan las credentials, aprendamos');
         onNavigate('/muro');
       })
       .catch((error) => {

@@ -1,5 +1,3 @@
-import { async } from 'regenerator-runtime';
-import { connectFirestoreEmulator } from 'firebase/firestore';
 import {
   savePost, onGetPosts, deletePost, getPost, updatePost, logOut, currentUser,
 } from '../fiberbase/firebase.js';
@@ -70,7 +68,7 @@ export const muro = (onNavigate) => {
         const time = dataPost.date.seconds;
         console.log(time);
         const objectoAccion = new Date(time * 1000);
-        if (dataPost.userUid === currentUser().uid) {
+        if (dataPost.userUid === currentUser().Uid) {
           html += `
             <div class = 'publicaciones'>
               <img src='${dataPost.profilePhoto}'>
