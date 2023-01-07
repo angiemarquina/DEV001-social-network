@@ -31,6 +31,7 @@ export const muro = (onNavigate) => {
   buttonToPost.className = 'buttonToPost';
   buttonToPost.textContent = 'Publicar';
 
+
   const taskDiv = document.createElement('div');
   taskDiv.id = 'taskDiv';
 
@@ -61,14 +62,11 @@ export const muro = (onNavigate) => {
   window.addEventListener('DOMContentLoaded', async () => {
     onGetPosts((querySnapshot) => {
       let html = '';
-      console.log(querySnapshot);
       querySnapshot.forEach((doc) => {
         const dataPost = doc.data();
-        console.log(dataPost);
         const time = dataPost.date.seconds;
-        console.log(time);
         const objectoAccion = new Date(time * 1000);
-        if (dataPost.userUid === currentUser().Uid) {
+        if (dataPost.userUid === currentUser().uid) {
           html += `
             <div class = 'publicaciones'>
               <img src='${dataPost.profilePhoto}'>
@@ -116,6 +114,11 @@ export const muro = (onNavigate) => {
         // hacer un ternario para que de actualizar pase a publicar
 
         const postConteiner = taskForm.posts;
+        if (!postConteiner.value) {
+          alert('Agrega un comentario antes de publicar');
+          return;
+        }
+
         const userUid = currentUser().uid;
         const profilePhoto = currentUser().photoURL;
         const userName = currentUser().displayName;
