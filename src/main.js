@@ -20,6 +20,7 @@ export const onNavigate = (pathname) => {
 
   rootDiv.appendChild(routes[pathname]);
 };
+// Las carpetas en las que se hace la modulación spa
 routes = {
   '/': home(onNavigate),
   '/register': register(onNavigate),
