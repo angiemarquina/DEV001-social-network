@@ -24,14 +24,13 @@ export const muro = (onNavigate) => {
   posts.placeholder = 'Agrega un post...';
   posts.className = 'posts';
   posts.id = 'posts';
-  // agregar un condicional que solo postee cuando este lleno
 
   const buttonToPost = document.createElement('button');
   buttonToPost.id = 'buttonToPost';
   buttonToPost.className = 'buttonToPost';
   buttonToPost.textContent = 'Publicar';
 
-
+  // Espacio vacío donde se muestran los post
   const taskDiv = document.createElement('div');
   taskDiv.id = 'taskDiv';
 
@@ -46,8 +45,10 @@ export const muro = (onNavigate) => {
   muroLogoDiv.appendChild(footprint);
 
   formPost.appendChild(muroPostsDiv);
+  // posts es la tex-area
   muroPostsDiv.appendChild(posts);
   muroPostsDiv.appendChild(iconsPostDiv);
+  // iconsPostDiv contiene solamente el boton de publicar
   iconsPostDiv.appendChild(buttonToPost);
 
   muroDiv.appendChild(taskDiv);
@@ -59,13 +60,19 @@ export const muro = (onNavigate) => {
   let id = '';
 
   // PERMITE QUE SE REALICEN LAS TAREAS Y LAS FUNCIONES
+  // Este evento se realiza cuando se carga la página y utiliza la función onGetPosts
+  // querySnapshot hace una consulta instantanea al crear un post
   window.addEventListener('DOMContentLoaded', async () => {
     onGetPosts((querySnapshot) => {
       let html = '';
+      // se consulta cada post con el forEach
       querySnapshot.forEach((doc) => {
+        // con dataPost accedemos al contenido del post
         const dataPost = doc.data();
         const time = dataPost.date.seconds;
         const objectoAccion = new Date(time * 1000);
+        // Condicional que dice que si el usuario logeado es el mismo que escribió el
+        // post que muestre las templates.
         if (dataPost.userUid === currentUser().uid) {
           html += `
             <div class = 'publicaciones'>
@@ -79,6 +86,7 @@ export const muro = (onNavigate) => {
               </div>
             </div>
           `;
+          // y sino se cumple que muestre los siguientes templates.
         } else {
           html += `
             <div class = 'publicaciones'>
@@ -96,29 +104,37 @@ export const muro = (onNavigate) => {
       // MANDA A LLAMAR LA IMG EDIT Y LUEGO PERMITE EDITAR
       const btnsEdit = taskConteiner.querySelectorAll('.img-edit');
       btnsEdit.forEach((btn) => {
+      // Cuando el boton de lapicito es clickeado y llama el id de ese post.
         btn.addEventListener('click', async (e) => {
           const doc = await getPost(e.target.dataset.id);
           const dataPost = doc.data();
 
+          // El formpost tiene los valores de los posts
           formPost.posts.value = dataPost.postConteiner;
+          // se cambia el valo a true para que deje editarlo.
           editStatus = true;
+          // es el id del post
           id = doc.id;
 
+          // se cambia a actualizar cuando el edtit status cambia a true.
           formPost.buttonToPost.innerHTML = 'Actualizar';
         });
       });
 
+      // Escucha el submit del boton publicar dentro del form.
       taskForm.addEventListener('submit', (e) => {
         e.preventDefault();
         formPost.buttonToPost.innerHTML = 'Publicar';
-        // hacer un ternario para que de actualizar pase a publicar
-
+        // hacer un ternario para que de actualizar pase a publicar.
+        // Posconteiner es el espacio de los posts con los posts.
         const postConteiner = taskForm.posts;
+        // si no hay nada en el postConteiner y das click, sale la alerta
+        // de agregar un comentario antes de publicar.
         if (!postConteiner.value) {
           alert('Agrega un comentario antes de publicar');
           return;
         }
-
+        // valores de
         const userUid = currentUser().uid;
         const profilePhoto = currentUser().photoURL;
         const userName = currentUser().displayName;

@@ -46,6 +46,7 @@ export const auth = getAuth(app);
 export const currentUser = () => auth.currentUser;
 
 export const signUp = (email, password) => createUserWithEmailAndPassword(auth, email, password);
+// Autentica mediante singInWithPopup google
 export const loginGoogle = () => {
   const provider = new GoogleAuthProvider();
   return signInWithPopup(auth, provider);
