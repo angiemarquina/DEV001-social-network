@@ -28,11 +28,9 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-items: center;
     background-color: var(--melon);
     padding-bottom: 30%;
-    border-radius:20px ;
-    padding-top: 20%;
+    border-radius: 20px;
 }
 
 /*CSS DEL HOME*/
@@ -221,6 +219,10 @@ p {
     background-color: var(--melon);
     display: grid;
 }
+.muroLogoDiv {
+    display: flex;
+    justify-content: center;
+}
 
 .muroPostsDiv {
     grid-template-rows: minmax(100px, auto);
@@ -228,6 +230,14 @@ p {
     gap: 1em;
     justify-items: inherit;
     padding: 20px;
+}
+
+#taskDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--melon);
+    height: 1400px;
 }
 
 .iconsPostDiv {
@@ -273,4 +283,58 @@ p {
     border-color: inherit;
     display: flex;
     justify-content: center;
+}
+
+.photo {
+    border-radius: 50%;
+    max-width: 60px;
+}
+
+.user-photo {
+    display: flex;
+    align-items: center;
+}
+.user {
+    margin-left: 15px;
+    color: var(--black);
+}
+
+.post {
+    color: var(--black);
+}
+
+.posts {
+    width: 60%;
+    border-radius: 10px;
+    border: 0;
+}
+
+.datePost {
+    font-size: 13px;
+    font-family: 'Franklin Gothic';
+}
+
+.logOutDiv {
+    background: var(--melon);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media only screen and (min-width: 768px) {
+    .publicaciones {
+        width: 60%;
+    }
+
+    .muroPostsDiv {
+        justify-items: center;
+    }
+
+    .posts {
+        width: 60%;
+        border-radius: 10px;
+        border: 0;
+    }
 }

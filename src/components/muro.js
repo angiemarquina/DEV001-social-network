@@ -11,6 +11,8 @@ export const muro = (onNavigate) => {
   muroPostsDiv.className = 'muroPostsDiv';
   const iconsPostDiv = document.createElement('div');
   iconsPostDiv.className = 'iconsPostDiv';
+  const logOutDiv = document.createElement('div');
+  logOutDiv.className = 'logOutDiv';
 
   const footprint = document.createElement('img');
   footprint.src = './imagenes/logonaranja.png';
@@ -52,7 +54,8 @@ export const muro = (onNavigate) => {
   iconsPostDiv.appendChild(buttonToPost);
 
   muroDiv.appendChild(taskDiv);
-  muroDiv.appendChild(buttonLogout);
+  muroDiv.appendChild(logOutDiv);
+  logOutDiv.appendChild(buttonLogout);
 
   const taskConteiner = muroDiv.querySelector('#taskDiv');
   const taskForm = muroDiv.querySelector('#formPost');
@@ -76,10 +79,12 @@ export const muro = (onNavigate) => {
         if (dataPost.userUid === currentUser().uid) {
           html += `
             <div class = 'publicaciones'>
-              <img src='${dataPost.profilePhoto}'>
-              <p>${dataPost.userName}</p>
-              <p>${objectoAccion}</p>
-              <p>${dataPost.postConteiner}</p>
+            <p class='datePost'>${objectoAccion}</p>
+            <div class='user-photo'> 
+            <img src='${dataPost.profilePhoto}' class='photo'>
+            <p class='user'>${dataPost.userName}</p>
+            </div>
+              <p class='post'>${dataPost.postConteiner}</p>
               <div class = 'contenedorIcons'>
                 <img src='./imagenes/edit_icon.png' class='img-edit' data-id='${doc.id}'>
                 <img src='./imagenes/trash_icon.png' class='img-delete' data-id='${doc.id}'>
@@ -89,16 +94,17 @@ export const muro = (onNavigate) => {
           // y sino se cumple que muestre los siguientes templates.
         } else {
           html += `
-            <div class = 'publicaciones'>
-            <img src='${dataPost.profilePhoto}'>
-            <p>${dataPost.userName}</p>
-            <p>${objectoAccion}</p>
-            <p>${dataPost.postConteiner}</p>
+          <div class = 'publicaciones'>
+            <p class='datePost'>${objectoAccion}</p>
+              <div class='user-photo'> 
+                <img src='${dataPost.profilePhoto}' class='photo'>
+                <p class='user'>${dataPost.userName}</p>
+              </div>
+            <p class='post'>${dataPost.postConteiner}</p>
             </div>
           `;
         }
       });
-
       taskConteiner.innerHTML = html;
 
       // MANDA A LLAMAR LA IMG EDIT Y LUEGO PERMITE EDITAR
@@ -134,14 +140,15 @@ export const muro = (onNavigate) => {
           alert('Agrega un comentario antes de publicar');
           return;
         }
-        // valores de
+        // valores de currentUser
         const userUid = currentUser().uid;
         const profilePhoto = currentUser().photoURL;
         const userName = currentUser().displayName;
+        const userEmail = currentUser().email;
         const date = new Date();
 
         if (!editStatus) {
-          savePost(postConteiner.value, userUid, profilePhoto, userName, date);
+          savePost(postConteiner.value, userUid, profilePhoto, userName, userEmail, date);
         } else {
           updatePost(id, {
             postConteiner: postConteiner.value,
@@ -165,7 +172,7 @@ export const muro = (onNavigate) => {
   });
 
   // PERMITE CERRAR SESION AL USUARIO
-  const cerrarSesion = muroDiv.querySelector('#buttonLogout');
+  const cerrarSesion = logOutDiv.querySelector('#buttonLogout');
   cerrarSesion.addEventListener('click', (e) => {
     e.preventDefault();
     logOut().then(() => {

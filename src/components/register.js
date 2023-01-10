@@ -1,4 +1,5 @@
-import { signUp } from '../fiberbase/firebase';
+import { updateProfile } from 'firebase/auth';
+import { auth, signUp } from '../fiberbase/firebase';
 
 export const register = (onNavigate) => {
   const registerDiv = document.createElement('main');
@@ -101,6 +102,15 @@ export const register = (onNavigate) => {
     const passwordR = signupRForm.passwordRegister.value;
     console.log(nameR, registerR, passwordR);
 
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        // Updates the user attributes:
+        updateProfile(user, { // <-- Update Method here
+          displayName: nameR,
+          photoURL: 'https://api.dicebear.com/5.x/bottts-neutral/svg',
+        });
+      }
+    });
     // agregar un updateprofile en el then del signUp para el nombre y foto default
     signUp(registerR, passwordR)
       .then((userCredential) => {
