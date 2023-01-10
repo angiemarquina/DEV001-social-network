@@ -56,9 +56,15 @@ export const logOut = () => signOut(auth);
 
 // Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(app);
-export const savePost = (postConteiner, userUid, profilePhoto, userName, date) => {
+export const savePost = (postConteiner, userUid, profilePhoto, userName, emailUser, date) => {
   addDoc(collection(db, 'posts'), {
-    postConteiner, userUid, profilePhoto, userName, date,
+    postConteiner,
+    userUid,
+    profilePhoto,
+    // profilePhoto: auth.currentUser.photoURL,
+    userName,
+    emailUser,
+    date,
   });
 };
 
