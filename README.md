@@ -1,3 +1,31 @@
+# CoHabita. Red Social para el cuidado de los animales.
+
+## Índice
+* [1.Descripción del producto.]
+* [2.Sobre el usuarios.]
+* [3. Puntos de intervención que busca el producto.]
+* [4. Estados de desarrollo del producto.]
+
+## 1.Descripción del producto.
+
+Se trata de una red social centrada en compartir información sobre los animales con los que convivimos cotidianamente. Las y los usuarios podrán compartir información sobre cómo cuidar a los animales presentes en nuestro entorno, además de adopciones y anuncios que ayuden a encontrar a animales domésticos perdidos. 
+Se trata de una aplicación de incidencia local en la que personas de una localidad y las cercanas, puedan involucrarse en una  comunidad virtual  que sume esfuerzos en el cuidado de los animales que viven y conviven a su al rededor.
+
+## 2.Sobre el usuarios.
+
+Las y los usuarios serán los más interesados en que sus vecinos estén dentro de la red.
+La aplicación tiene el objetivo general de contribuir a crear conciencia y generar una comunidad local que sume esfuerzos por el cuidado de los animales que los rodean.
+Las interfaces y el diseño SPA, permiten que la navegación sea sencilla, para facilitar la experiencia y lo más importante sea la interacción con otras personas interesadas en compartir información sobre nuestra convivencia con animales.
+
+## 3. Puntos de intervención que busca el producto.
+
+La gran mayoría de aplicaciones sobre animales, se concentra en animales domésticos, naturalmente son con los que compartimos la vida día con día, pero además existen otros animales que aún en entornos urbanos compartimos espacios sin ser muy conscientes de su existencia y de la necesidad de su cuidado. ¿Qué pasa con las abejas, las mariposas, los pájaros silvestres? La información sobre estos animales es también uno de los objetivos de esta red que puede ayudar a que seamos conscientes de la totalidad de animales con los que convivimos, desde los domésticos hasta los que no lo son y así entender que formamos parte de un todo que tenemos la responsabilidad de cuidar.
+
+## 4. Estados de desarrollo del producto.
+
+La aplicación cuenta con la funcionalidad básica de una red social, con posibilidad de loggearse  y compartir información ademas de poder editarla y borrarla. En un futuro buscará enriquecerse con la incorporación de imágenes, comentarios de posts específicos y otros detalles que harán de la experiencia sea más agradable y pueda facilitar la comunicación.
+
+
 # Creando una Red Social
 
 ## Índice
