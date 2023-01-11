@@ -1,3 +1,8 @@
+# Prototipo de Alta Fidelidad
+![prototipo_de_cohabita](https://user-images.githubusercontent.com/89883023/211699745-6c57a932-6306-4418-b080-826623842aa1.jpg)
+# Prototipo de Baja Fidelidad
+![Prototipo de baja fidelidad cohabita](https://user-images.githubusercontent.com/89883023/211699799-6be7d21f-b883-4e7a-af1e-dc6b89075130.jpg)
+
 # CoHabita. Red Social para el cuidado de los animales.
 
 ## Índice
