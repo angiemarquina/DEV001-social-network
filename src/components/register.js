@@ -13,7 +13,7 @@ export const register = (onNavigate) => {
   formRegister.action = '';
 
   const footprint = document.createElement('img');
-  footprint.src = './imagenes/logorosa.png';
+  footprint.src = 'https://i.postimg.cc/YCwBW39F/logorosa.png';
   footprint.alt = 'la huella de una patita';
   footprint.className = 'footprint';
 

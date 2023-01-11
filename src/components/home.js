@@ -14,13 +14,13 @@ export const home = (onNavigate) => {
 
   // Imagen del logo de cohabita
   const footprint = document.createElement('img');
-  footprint.src = './imagenes/logonaranja.png';
+  footprint.src = 'https://i.postimg.cc/tgpbL5Gb/logonaranja.png';
   footprint.alt = 'la huella de una patita';
   footprint.className = 'footprint';
 
   // Imagen animalitos
   const animals = document.createElement('img');
-  animals.src = './imagenes/animalestres.jpg';
+  animals.src = 'https://i.postimg.cc/bwV31YYt/animalestres.jpg';
   animals.alt = 'perro, gato y pajaro';
   animals.className = 'animals';
 
