@@ -15,7 +15,7 @@ export const muro = (onNavigate) => {
   logOutDiv.className = 'logOutDiv';
 
   const footprint = document.createElement('img');
-  footprint.src = './imagenes/logonaranja.png';
+  footprint.src = 'https://i.postimg.cc/tgpbL5Gb/logonaranja.png';
   footprint.alt = 'la huella de una patita';
   footprint.className = 'footprint';
 
@@ -86,8 +86,8 @@ export const muro = (onNavigate) => {
             </div>
               <p class='post'>${dataPost.postConteiner}</p>
               <div class = 'contenedorIcons'>
-                <img src='./imagenes/edit_icon.png' class='img-edit' data-id='${doc.id}'>
-                <img src='./imagenes/trash_icon.png' class='img-delete' data-id='${doc.id}'>
+                <img src='https://i.postimg.cc/xqDhLf0Q/edit-icon.png' class='img-edit' data-id='${doc.id}'>
+                <img src='https://i.postimg.cc/8PLP9sfh/trash-icon.png' class='img-delete' data-id='${doc.id}'>
               </div>
             </div>
           `;
@@ -126,9 +126,10 @@ export const muro = (onNavigate) => {
           formPost.buttonToPost.innerHTML = 'Actualizar';
         });
       });
-
+      console.log('se agrega el evento');
       // Escucha el submit del boton publicar dentro del form.
       taskForm.addEventListener('submit', (e) => {
+        console.log("hola")
         e.preventDefault();
         formPost.buttonToPost.innerHTML = 'Publicar';
         // hacer un ternario para que de actualizar pase a publicar.
@@ -136,10 +137,12 @@ export const muro = (onNavigate) => {
         const postConteiner = taskForm.posts;
         // si no hay nada en el postConteiner y das click, sale la alerta
         // de agregar un comentario antes de publicar.
-        if (!postConteiner.value) {
-          alert('Agrega un comentario antes de publicar');
-          return;
-        }
+
+        // if (!postConteiner.value) {
+        //   alert('Agrega un comentario antes de publicar');
+        //   return;
+        // }
+
         // valores de currentUser
         const userUid = currentUser().uid;
         const profilePhoto = currentUser().photoURL;
