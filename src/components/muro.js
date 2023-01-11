@@ -76,7 +76,7 @@ export const muro = (onNavigate) => {
         const objectoAccion = new Date(time * 1000);
         // Condicional que dice que si el usuario logeado es el mismo que escribió el
         // post que muestre las templates.
-        if (dataPost.userUid === currentUser().uid) {
+        if (currentUser() && dataPost.userUid === currentUser().uid) {
           html += `
             <div class = 'publicaciones'>
             <p class='datePost'>${objectoAccion}</p>
